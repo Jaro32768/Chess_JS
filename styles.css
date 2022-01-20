@@ -16,10 +16,10 @@ body {
     font-size: 50px;
 }
 .dark {
-    background-color: #960;
+    background-color: #996600;
 }
 .light {
-    background-color: #ff8;
+    background-color: #ffff88;
 }
 .coordinates {
     position: absolute;
