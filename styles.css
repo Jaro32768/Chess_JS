@@ -1,0 +1,21 @@
+* {
+    margin: 0;
+    background-color: #0f0f35;
+}
+.grid-container {
+    display: grid;
+    grid-template-columns: 5vw 5vw 5vw 5vw 5vw 5vw 5vw 5vw;
+    grid-template-rows: 5vw 5vw 5vw 5vw 5vw 5vw 5vw 5vw;
+    padding: 0 30vw 0 30vw;
+  }
+  .grid-item {
+    background-color: rgba(255, 255, 255, 0.8);
+    border: 1px solid rgba(0, 0, 0, 0.8);
+    font-size: 50px;
+  }
+  .dark {
+      background-color: #960;
+  }
+  .light {
+      background-color: #ff8;
+  }
