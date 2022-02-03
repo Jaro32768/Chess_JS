@@ -1,7 +1,9 @@
+import Board from './Board.js'
+
 function App() {
   return (
-    <div className="App">
-     
+    <div className='App'>
+        <Board/>
     </div>
   );
 }

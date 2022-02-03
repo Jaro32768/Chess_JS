@@ -1,0 +1,14 @@
+.boardRow{
+    display:flex;
+}
+.lightSquare,
+.darkSquare{
+    height: 5vw;
+    width: 5vw;
+}
+.lightSquare{
+    background-color: rgb(228, 210, 131);
+}
+.darkSquare{
+    background-color: rgb(68, 57, 9);
+}
