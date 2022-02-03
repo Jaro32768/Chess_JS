@@ -8,7 +8,5 @@ export default function Square(props) {
         if ((props.row + props.column) % 2 === 0) setClassName('lightSquare')
         else setClassName('darkSquare')
 
-    return (
-        <div className={className}></div>
-    );
+    return <div className={className}></div>;
 }
