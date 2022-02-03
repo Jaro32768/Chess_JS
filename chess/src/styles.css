@@ -17,3 +17,7 @@
 .darkSquare{
     background-color: rgb(68, 57, 9);
 }
+.imgPiece{
+    height: 5vw;
+    width: 5vw;
+}
