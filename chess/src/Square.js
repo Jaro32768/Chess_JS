@@ -21,18 +21,18 @@ export default function Square(props) {
         else setClassName('darkSquare')
         
     switch(props.piece) {
-        case 'black-bishop': return <div className={className}><img className='imgPiece' src={BlackBishop}></img></div>;
-        case 'black-knight': return <div className={className}><img className='imgPiece' src={BlackKnight}></img></div>;
-        case 'black-pawn': return <div className={className}><img className='imgPiece' src={BlackPawn}></img></div>;
-        case 'black-queen': return <div className={className}><img className='imgPiece' src={BlackQueen}></img></div>;
-        case 'black-rook': return <div className={className}><img className='imgPiece' src={BlackRook}></img></div>;
-        case 'black-king': return <div className={className}><img className='imgPiece' src={BlackKing}></img></div>;
-        case 'white-bishop': return <div className={className}><img className='imgPiece' src={WhiteBishop}></img></div>;
-        case 'white-knight': return <div className={className}><img className='imgPiece' src={WhiteKnight}></img></div>;
-        case 'white-pawn': return <div className={className}><img className='imgPiece' src={WhitePawn}></img></div>;
-        case 'white-queen': return <div className={className}><img className='imgPiece' src={WhiteQueen}></img></div>;
-        case 'white-rook': return <div className={className}><img className='imgPiece' src={WhiteRook}></img></div>;
-        case 'white-king': return <div className={className}><img className='imgPiece' src={WhiteKing}></img></div>;
+        case 'black-bishop': return <div className={className}><img className='imgPiece' alt='BlackBishop' src={BlackBishop}></img></div>;
+        case 'black-knight': return <div className={className}><img className='imgPiece' alt='BlackKnight' src={BlackKnight}></img></div>;
+        case 'black-pawn': return <div className={className}><img className='imgPiece' alt='BlackPawn' src={BlackPawn}></img></div>;
+        case 'black-queen': return <div className={className}><img className='imgPiece' alt='BlackQueen' src={BlackQueen}></img></div>;
+        case 'black-rook': return <div className={className}><img className='imgPiece' alt='BlackRook' src={BlackRook}></img></div>;
+        case 'black-king': return <div className={className}><img className='imgPiece' alt='BlackKing' src={BlackKing}></img></div>;
+        case 'white-bishop': return <div className={className}><img className='imgPiece' alt='WhiteBishop' src={WhiteBishop}></img></div>;
+        case 'white-knight': return <div className={className}><img className='imgPiece' alt='WhiteKnight' src={WhiteKnight}></img></div>;
+        case 'white-pawn': return <div className={className}><img className='imgPiece' alt='WhitePawn' src={WhitePawn}></img></div>;
+        case 'white-queen': return <div className={className}><img className='imgPiece' alt='WhiteQueen' src={WhiteQueen}></img></div>;
+        case 'white-rook': return <div className={className}><img className='imgPiece' alt='WhiteRook' src={WhiteRook}></img></div>;
+        case 'white-king': return <div className={className}><img className='imgPiece' alt='WhiteKing' src={WhiteKing}></img></div>;
         default: return <div className={className}></div>;
     }    
 }
