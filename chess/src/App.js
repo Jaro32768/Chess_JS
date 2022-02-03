@@ -1,9 +1,9 @@
-import Board from './Board.js'
+import Board from './Board.js'    // imports Board component
 
 function App() {
   return (
     <div className='App'>
-        <Board/>
+        <Board/>                  {/* renders board */}
     </div>
   );
 }
