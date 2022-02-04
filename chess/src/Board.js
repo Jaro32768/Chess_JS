@@ -83,19 +83,104 @@ const pieces = [            // content of each position on board
     'white-knight',         // notation: g1     row: 7     column: 6
     'white-rook'            // notation: h1     row: 7     column: 7
 ]
+let isSelected = [
+    // 8TH RANK //
+    false,              // notation: a8     row: 0     column: 0
+    false,              // notation: b8     row: 0     column: 1
+    false,              // notation: c8     row: 0     column: 2
+    false,              // notation: d8     row: 0     column: 3
+    false,              // notation: e8     row: 0     column: 4
+    false,              // notation: f8     row: 0     column: 5
+    false,              // notation: g8     row: 0     column: 6
+    false,              // notation: h8     row: 0     column: 7
 
+    // 7TH RANK //
+    false,              // notation: a7     row: 1     column: 0
+    false,              // notation: b7     row: 1     column: 1
+    false,              // notation: c7     row: 1     column: 2
+    false,              // notation: d7     row: 1     column: 3
+    false,              // notation: e7     row: 1     column: 4
+    false,              // notation: f7     row: 1     column: 5
+    false,              // notation: g7     row: 1     column: 6
+    false,              // notation: h7     row: 1     column: 7
+
+    // 6TH RANK //
+    false,              // notation: a6     row: 2     column: 0
+    false,              // notation: b6     row: 2     column: 1
+    false,              // notation: c6     row: 2     column: 2
+    false,              // notation: d6     row: 2     column: 3
+    false,              // notation: e6     row: 2     column: 4
+    false,              // notation: f6     row: 2     column: 5
+    false,              // notation: g6     row: 2     column: 6
+    false,              // notation: h6     row: 2     column: 7
+
+    // 5TH RANK //
+    false,              // notation: a5     row: 3     column: 0
+    false,              // notation: b5     row: 3     column: 1
+    false,              // notation: c5     row: 3     column: 2
+    false,              // notation: d5     row: 3     column: 3
+    false,              // notation: e5     row: 3     column: 4
+    false,              // notation: f5     row: 3     column: 5
+    false,              // notation: g5     row: 3     column: 6
+    false,              // notation: h5     row: 3     column: 7
+
+    // 4TH RANK //
+    false,              // notation: a4     row: 4     column: 0
+    false,              // notation: b4     row: 4     column: 1
+    false,              // notation: c4     row: 4     column: 2
+    false,              // notation: d4     row: 4     column: 3
+    false,              // notation: e4     row: 4     column: 4
+    false,              // notation: f4     row: 4     column: 5
+    false,              // notation: g4     row: 4     column: 6
+    false,              // notation: h4     row: 4     column: 7
+
+    // 3RD RANK //
+    false,              // notation: a3     row: 5     column: 0
+    false,              // notation: b3     row: 5     column: 1
+    false,              // notation: c3     row: 5     column: 2
+    false,              // notation: d3     row: 5     column: 3
+    false,              // notation: e3     row: 5     column: 4
+    false,              // notation: f3     row: 5     column: 5
+    false,              // notation: g3     row: 5     column: 6
+    false,              // notation: h3     row: 5     column: 7
+
+    // 2ND RANK //
+    false,              // notation: a2     row: 6     column: 0
+    false,              // notation: b2     row: 6     column: 1
+    false,              // notation: c2     row: 6     column: 2
+    false,              // notation: d2     row: 6     column: 3
+    false,              // notation: e2     row: 6     column: 4
+    false,              // notation: f2     row: 6     column: 5
+    false,              // notation: g2     row: 6     column: 6
+    false,              // notation: h2     row: 6     column: 7
+
+    // 1ST RANK //
+    false,              // notation: a1     row: 7     column: 0
+    false,              // notation: b1     row: 7     column: 1
+    false,              // notation: c1     row: 7     column: 2
+    false,              // notation: d1     row: 7     column: 3
+    false,              // notation: e1     row: 7     column: 4
+    false,              // notation: f1     row: 7     column: 5
+    false,              // notation: g1     row: 7     column: 6
+    false               // notation: h1     row: 7     column: 7
+]
 export default function Board() {
     const [selectedRow, setSelectedRow] = useState(null);           // stores row of previously clicked square
     const [selectedColumn, setSelectedColumn] = useState(null);     // stores column of previously clicked square
     
     // makes move //
     const handleClick = (senderRow, senderColumn) => {
-        if (pieces[8 * selectedRow + selectedColumn] === null ||                    // if clicked square is empty
-            (selectedRow === senderRow && selectedColumn === senderColumn) ||       // or if clicked square is same as previously clicked square
-            selectedRow === null) {                                                 // or if this is first clicked square
+        for (let i = 0; i < 64; i++) if (isSelected[i] === true) isSelected[i] = false;             // clears all highlights
+        if (pieces[8 * selectedRow + selectedColumn] === null ||                                    // if clicked square is empty
+            selectedRow === null) {                                                                 // or if this is first clicked square
 
-            setSelectedRow(senderRow);                                              // remembers row of clicked square
-            setSelectedColumn(senderColumn);                                        // remembers column of clicked square
+            isSelected[8 * senderRow + senderColumn] = true;                                        // highlights selected square
+            setSelectedRow(senderRow);                                                              // remembers row of clicked square
+            setSelectedColumn(senderColumn);                                                        // remembers column of clicked square
+        }
+        else if (selectedRow === senderRow && selectedColumn === senderColumn) {                    // if clicked square is same as previously clicked square - deselect            
+            setSelectedRow(null);                                                                   // clears previously selected row
+            setSelectedColumn(null);                                                                // clears previously selected column
         }
         else {
             pieces[8 * senderRow + senderColumn] = pieces[8 * selectedRow + selectedColumn];        // copies piece from previously clicked square to clicked square
@@ -107,7 +192,13 @@ export default function Board() {
 
     // renders 1 square //
     const renderSquare = (piecesIndex) => {
-        return <Square piece={pieces[piecesIndex]} row={Math.floor(piecesIndex / 8)} column={piecesIndex % 8} key={piecesIndex} handleClick={handleClick}/>;  // returns square
+        return <Square piece={pieces[piecesIndex]}                  // what piece is on this square
+                       row={Math.floor(piecesIndex / 8)}            // what is row of this square
+                       column={piecesIndex % 8}                     // what is column of this square
+                       key={piecesIndex}                            // key - has to be there, because of loop
+                       handleClick={handleClick}                    // passes handleClick() to Square so it may be used
+                       isSelected={isSelected[piecesIndex]}         // should square be highlighted
+                       />;                                          // returns square
     }
 
     // renders 1 row //

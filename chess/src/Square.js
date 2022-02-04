@@ -42,7 +42,7 @@ export default function Square(props) {
     }
 
     const renderImage = () => {
-        if (image !== null) return <img className='imgPiece' alt={props.piece} src={image}></img>;  // if there is any image, image is rendered
+        if (image !== null) return <img className={props.isSelected ? 'imgPiece selectedSquare' : 'imgPiece'} alt={props.piece} src={image}></img>;  // if there is any image, image is rendered
         return;                                                                                     // if there is not any image, image is not rendered
     }
 

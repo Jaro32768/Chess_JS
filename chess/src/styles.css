@@ -18,3 +18,6 @@
 .darkSquare{
     background-color: rgb(68, 57, 9);
 }
+.selectedSquare{
+    background-color:  rgba(93, 0, 155, 0.377);
+}
