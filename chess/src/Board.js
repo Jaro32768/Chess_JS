@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import Square from './Square.js';       // imports Square component
 import './styles.css'                   // imports stylesheet
 
@@ -85,10 +85,29 @@ const pieces = [            // content of each position on board
 ]
 
 export default function Board() {
+    const [selectedRow, setSelectedRow] = useState(null);           // stores row of previously clicked square
+    const [selectedColumn, setSelectedColumn] = useState(null);     // stores column of previously clicked square
+    
+    // makes move //
+    const handleClick = (senderRow, senderColumn) => {
+        if (pieces[8 * selectedRow + selectedColumn] === null ||                    // if clicked square is empty
+            (selectedRow === senderRow && selectedColumn === senderColumn) ||       // or if clicked square is same as previously clicked square
+            selectedRow === null) {                                                 // or if this is first clicked square
+
+            setSelectedRow(senderRow);                                              // remembers row of clicked square
+            setSelectedColumn(senderColumn);                                        // remembers column of clicked square
+        }
+        else {
+            pieces[8 * senderRow + senderColumn] = pieces[8 * selectedRow + selectedColumn];        // copies piece from previously clicked square to clicked square
+            pieces[8 * selectedRow + selectedColumn] = null;                                        // removes piece from previously clicked square
+            setSelectedRow(null);                                                                   // clears previously selected row
+            setSelectedColumn(null);                                                                // clears previously selected column
+        }
+    }
 
     // renders 1 square //
     const renderSquare = (piecesIndex) => {
-        return <Square piece={pieces[piecesIndex]} row={Math.floor(piecesIndex / 8)} column={piecesIndex % 8} key={piecesIndex}/>;  // returns square
+        return <Square piece={pieces[piecesIndex]} row={Math.floor(piecesIndex / 8)} column={piecesIndex % 8} key={piecesIndex} handleClick={handleClick}/>;  // returns square
     }
 
     // renders 1 row //

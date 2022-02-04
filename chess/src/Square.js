@@ -34,6 +34,11 @@ export default function Square(props) {
         case 'white-queen':  { image = WhiteQueen;  break; }                    // sets image to white queen
         case 'white-rook':   { image = WhiteRook;   break; }                    // sets image to white rook
         case 'white-king':   { image = WhiteKing;   break; }                    // sets image to white king
+        default :            { image = null;        break; }                    // sets image to empty square
+    }
+
+    const handleClick = () => {
+        props.handleClick(props.row, props.column);                             // passes square's coordinates to Board
     }
 
     const renderImage = () => {
@@ -41,5 +46,5 @@ export default function Square(props) {
         return;                                                                                     // if there is not any image, image is not rendered
     }
 
-    return <div className={className}>{renderImage()}</div>;                                        // renders square
+    return <div onClick={handleClick} className={className}>{renderImage()}</div>;                                        // renders square
 }
