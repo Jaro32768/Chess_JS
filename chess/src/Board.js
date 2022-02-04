@@ -85,89 +85,29 @@ const pieces = [            // content of each position on board
 ]
 
 export default function Board() {
-    return (
-        <>                  {/* empty element, because return may return only one element */}
-            <div className='boardRow'>                                  {/* places squares in a row */}
-                <Square piece={pieces[0]} row={0} column={0}/>          {/* renders a8 square */}
-                <Square piece={pieces[1]} row={0} column={1}/>          {/* renders b8 square */}
-                <Square piece={pieces[2]} row={0} column={2}/>          {/* renders c8 square */}
-                <Square piece={pieces[3]} row={0} column={3}/>          {/* renders d8 square */}
-                <Square piece={pieces[4]} row={0} column={4}/>          {/* renders e8 square */}
-                <Square piece={pieces[5]} row={0} column={5}/>          {/* renders f8 square */}
-                <Square piece={pieces[6]} row={0} column={6}/>          {/* renders g8 square */}
-                <Square piece={pieces[7]} row={0} column={7}/>          {/* renders h8 square */}
-            </div>
-            <div className='boardRow'>                                  {/* places squares in a row */}
-                <Square piece={pieces[8]} row={1} column={0}/>          {/* renders a7 square */}
-                <Square piece={pieces[9]} row={1} column={1}/>          {/* renders b7 square */}
-                <Square piece={pieces[10]} row={1} column={2}/>         {/* renders c7 square */}
-                <Square piece={pieces[11]} row={1} column={3}/>         {/* renders d7 square */}
-                <Square piece={pieces[12]} row={1} column={4}/>         {/* renders e7 square */}
-                <Square piece={pieces[13]} row={1} column={5}/>         {/* renders f7 square */}
-                <Square piece={pieces[14]} row={1} column={6}/>         {/* renders g7 square */}
-                <Square piece={pieces[15]} row={1} column={7}/>         {/* renders h7 square */}
-            </div>
-            <div className='boardRow'>                                  {/* places squares in a row */}
-                <Square piece={pieces[16]} row={2} column={0}/>         {/* renders a6 square */}
-                <Square piece={pieces[17]} row={2} column={1}/>         {/* renders b6 square */}
-                <Square piece={pieces[18]} row={2} column={2}/>         {/* renders c6 square */}
-                <Square piece={pieces[19]} row={2} column={3}/>         {/* renders d6 square */}
-                <Square piece={pieces[20]} row={2} column={4}/>         {/* renders e6 square */}
-                <Square piece={pieces[21]} row={2} column={5}/>         {/* renders f6 square */}
-                <Square piece={pieces[22]} row={2} column={6}/>         {/* renders g6 square */}
-                <Square piece={pieces[23]} row={2} column={7}/>         {/* renders h6 square */}
-            </div>
-            <div className='boardRow'>                                  {/* places squares in a row */}
-                <Square piece={pieces[24]} row={3} column={0}/>         {/* renders a5 square */}
-                <Square piece={pieces[25]} row={3} column={1}/>         {/* renders b5 square */}
-                <Square piece={pieces[26]} row={3} column={2}/>         {/* renders c5 square */}
-                <Square piece={pieces[27]} row={3} column={3}/>         {/* renders d5 square */}
-                <Square piece={pieces[28]} row={3} column={4}/>         {/* renders e5 square */}
-                <Square piece={pieces[29]} row={3} column={5}/>         {/* renders f5 square */}
-                <Square piece={pieces[30]} row={3} column={6}/>         {/* renders g5 square */}
-                <Square piece={pieces[31]} row={3} column={7}/>         {/* renders h5 square */}
-            </div>
-            <div className='boardRow'>                                  {/* places squares in a row */}
-                <Square piece={pieces[32]} row={4} column={0}/>         {/* renders a4 square */}
-                <Square piece={pieces[33]} row={4} column={1}/>         {/* renders b4 square */}
-                <Square piece={pieces[34]} row={4} column={2}/>         {/* renders c4 square */}
-                <Square piece={pieces[35]} row={4} column={3}/>         {/* renders d4 square */}
-                <Square piece={pieces[36]} row={4} column={4}/>         {/* renders e4 square */}
-                <Square piece={pieces[37]} row={4} column={5}/>         {/* renders f4 square */}
-                <Square piece={pieces[38]} row={4} column={6}/>         {/* renders g4 square */}
-                <Square piece={pieces[39]} row={4} column={7}/>         {/* renders h4 square */}
-            </div>
-            <div className='boardRow'>                                  {/* places squares in a row */}
-                <Square piece={pieces[40]} row={5} column={0}/>         {/* renders a3 square */}
-                <Square piece={pieces[41]} row={5} column={1}/>         {/* renders b3 square */}
-                <Square piece={pieces[42]} row={5} column={2}/>         {/* renders c3 square */}
-                <Square piece={pieces[43]} row={5} column={3}/>         {/* renders d3 square */}
-                <Square piece={pieces[44]} row={5} column={4}/>         {/* renders e3 square */}
-                <Square piece={pieces[45]} row={5} column={5}/>         {/* renders f3 square */}
-                <Square piece={pieces[46]} row={5} column={6}/>         {/* renders g3 square */}
-                <Square piece={pieces[47]} row={5} column={7}/>         {/* renders h3 square */}
-            </div>
-            <div className='boardRow'>                                  {/* places squares in a row */}
-                <Square piece={pieces[48]} row={6} column={0}/>         {/* renders a2 square */}
-                <Square piece={pieces[49]} row={6} column={1}/>         {/* renders b2 square */}
-                <Square piece={pieces[50]} row={6} column={2}/>         {/* renders c2 square */}
-                <Square piece={pieces[51]} row={6} column={3}/>         {/* renders d2 square */}
-                <Square piece={pieces[52]} row={6} column={4}/>         {/* renders e2 square */}
-                <Square piece={pieces[53]} row={6} column={5}/>         {/* renders f2 square */}
-                <Square piece={pieces[54]} row={6} column={6}/>         {/* renders g2 square */}
-                <Square piece={pieces[55]} row={6} column={7}/>         {/* renders h2 square */}
-            </div>
-            <div className='boardRow'>                                  {/* places squares in a row */}
-                <Square piece={pieces[56]} row={7} column={0}/>         {/* renders a1 square */}
-                <Square piece={pieces[57]} row={7} column={1}/>         {/* renders b1 square */}
-                <Square piece={pieces[58]} row={7} column={2}/>         {/* renders c1 square */}
-                <Square piece={pieces[59]} row={7} column={3}/>         {/* renders d1 square */}
-                <Square piece={pieces[60]} row={7} column={4}/>         {/* renders e1 square */}
-                <Square piece={pieces[61]} row={7} column={5}/>         {/* renders f1 square */}
-                <Square piece={pieces[62]} row={7} column={6}/>         {/* renders g1 square */}
-                <Square piece={pieces[63]} row={7} column={7}/>         {/* renders h1 square */}
-            </div>
-            
-        </>
-    );
+
+    // renders 1 square //
+    const renderSquare = (piecesIndex) => {
+        return <Square piece={pieces[piecesIndex]} row={Math.floor(piecesIndex / 8)} column={piecesIndex % 8} key={piecesIndex}/>;  // returns square
+    }
+
+    // renders 1 row //
+    const renderRow = (startingIndex) => {
+        const squares = [];                                             // contains all squares in a row
+        for (let i = startingIndex; i < startingIndex + 8; i++) {       // 8 squares in a row - for each of them
+            squares.push(renderSquare(i));                              // renders square and adds it to array
+        }
+        return <div className='boardRow' key={startingIndex}>{squares}</div>;   // returns row
+    }
+    
+    // renders entire board //
+    const render = () => {
+        const rows = [];                                                // contains all rows
+        for (let i = 0; i < 8; i++) {                                   // 8 rows - for each of them
+            rows.push(renderRow(i*8));                                  // renders row and adds it it array
+        }
+        return <>{rows}</>;             // returns entire board
+    }
+
+    return <>{render()}</>              // renders entire board
 }
