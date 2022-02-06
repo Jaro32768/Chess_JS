@@ -2,7 +2,7 @@ import React, {useState} from 'react';
 import Square from './Square.js';       // imports Square component
 import './styles.css'                   // imports stylesheet
 
-const pieces = [            // content of each position on board
+const pieces = [            // content of each position on board - [ piece on square, isHighlighted ]
     // 8TH RANK //
     [ 'black-rook', false ],            // notation: a8     row: 0     column: 0
     [ 'black-knight', false ],          // notation: b8     row: 0     column: 1
