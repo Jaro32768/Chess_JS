@@ -21,3 +21,6 @@
 .selectedSquare{
     background-color:  rgba(93, 0, 155, 0.377);
 }
+.possibleMove{
+    background-color: rgba(106, 255, 0, 0.392);
+}

@@ -42,8 +42,8 @@ export default function Square(props) {
     }
 
     const renderImage = () => {
-        if (image !== null) return <img className={props.isSelected ? 'imgPiece selectedSquare' : 'imgPiece'} alt={props.piece} src={image}></img>;  // if there is any image, image is rendered
-        return;                                                                                     // if there is not any image, image is not rendered
+        return <img className={!props.isSelected ? (props.isPossibleToMoveThere ? 'imgPiece possibleMove' : 'imgPiece') : 'imgPiece selectedSquare'}
+                    alt={props.piece} src={image}></img>;                       // renders image
     }
 
     return <div onClick={handleClick} className={className}>{renderImage()}</div>;                                        // renders square
