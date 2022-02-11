@@ -12,6 +12,7 @@ import WhitePawn from './images/white-pawn.svg.png'                             
 import WhiteQueen from './images/white-queen.svg.png'                           // imports image - white queen
 import WhiteRook from './images/white-rook.svg.png'                             // imports image - white rook
 import WhiteKing from './images/white-king.svg.png'                             // imports image - white bishop
+import Transparent from './images/transparent.png'                              // imports transparent image
 
 export default function Square(props) {
     const [className, setClassName] = useState(null);                           // remembers, which class in styles.css should be used
@@ -34,7 +35,7 @@ export default function Square(props) {
         case 'white-queen':  { image = WhiteQueen;  break; }                    // sets image to white queen
         case 'white-rook':   { image = WhiteRook;   break; }                    // sets image to white rook
         case 'white-king':   { image = WhiteKing;   break; }                    // sets image to white king
-        default :            { image = null;        break; }                    // sets image to empty square
+        default:             { image = Transparent; break; }                    // sets image to empty square
     }
 
     const handleClick = () => {
