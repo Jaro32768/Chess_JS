@@ -1,4 +1,4 @@
-function getLegalMoves(position, aRookMoved, hRookMoved, kingMoved, kingAttacked) {
+export function getLegalMovesK(position, aRookMoved, hRookMoved, kingMoved, kingAttacked) {
 
 }
 

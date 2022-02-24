@@ -1,11 +1,11 @@
-function getLegalMoves(position) {
+export function getLegalMovesR(position) {
 
 }
 
-function moveVerticaly(position) {
+export function moveVerticaly(position) {
 
 }
 
-function moveHorizontaly(position) {
+export function moveHorizontaly(position) {
 
 }

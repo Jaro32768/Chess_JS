@@ -1,9 +1,14 @@
 import React, {useState} from 'react';
-import Square from './Square.js';       // imports Square component
-import '../styles/styles.css'           // imports stylesheet
+import Square from './Square.js';                   // imports Square component
+import '../styles/styles.css'                       // imports stylesheet
+import {getLegalMovesP} from '../pieces/Pawn.js';   // imports method that searches for legal moves for pawn
+import {getLegalMovesR} from '../pieces/Rook.js';   // imports method that searches for legal moves for rook
+import {getLegalMovesN} from '../pieces/Knight.js'; // imports method that searches for legal moves for knight
+import {getLegalMovesB} from '../pieces/Bishop.js'; // imports method that searches for legal moves for bishop
+import {getLegalMovesQ} from '../pieces/Queen.js';  // imports method that searches for legal moves for queen
+import {getLegalMovesK} from '../pieces/King.js';   // imports method that searches for legal moves for king
 
 let highlightedSquare = null;           // remembers which square should be highlighted
-let areLegalMovesSet = false;           // auxiliary variable to avoid infinite loop
 
 const pieces = [                        // content of each position on board - [ pieceOnSquare , isPossibleToMoveThere ]
     // 8TH RANK //
@@ -93,12 +98,12 @@ export default function Board() {
 
 
     // sets legal moves //
-    const setLegalMoves = () => {
+    const setLegalMoves = (selectedSquare) => {
         resetLegalMoves();                  // resets legal moves
+        let legalMoves = getLegalMoves(selectedSquare);
         for (let i = 0; i < 64; i++) {      // for each square on board
-            if (false) {                    // JUST PLACEHOLDER FOR NOW, SHOULD BE CHANGED TO CALL OF getLegalMoves() WHICH WILL BE COMPARED WITH INDEX
+            if (legalMoves[i]) {                    // JUST PLACEHOLDER FOR NOW, SHOULD BE CHANGED TO CALL OF getLegalMoves() WHICH WILL BE COMPARED WITH INDEX
                 pieces[i][1] = true;        // sets move to legal
-                areLegalMovesSet = true;    // avoids infinite loop
             }
         }
     }
@@ -107,7 +112,18 @@ export default function Board() {
     const resetLegalMoves = () => {
         for (let i = 0; i < 64; i++) {      // for each square on board
             pieces[i][1] = false;           // sets move to illegal
-            areLegalMovesSet = false;       // avoids infinite loop
+        }
+    }
+
+    // returns legal moves based on piece
+    const getLegalMoves = (selectedSquare) => {
+        switch(selectedSquare) {
+            case 'white-pawn': case 'black-pawn': return getLegalMovesP();      // returns legal moves for pawn
+            case 'white-rook': case 'black-rook': return getLegalMovesR();      // returns legal moves for rook
+            case 'white-knight': case 'black-knight': return getLegalMovesN();  // returns legal moves for knight
+            case 'white-bishop': case 'black-bishop': return getLegalMovesB();  // returns legal moves for bishop
+            case 'white-queen': case 'black-queen': return getLegalMovesQ();    // returns legal moves for queen
+            case 'white-king': case 'black-king': return getLegalMovesK();      // returns legal moves for king
         }
     }
     
@@ -119,6 +135,7 @@ export default function Board() {
             highlightedSquare = 8 * senderRow + senderColumn                                        // highlights selected square
             setSelectedRow(senderRow);                                                              // remembers row of clicked square
             setSelectedColumn(senderColumn);                                                        // remembers column of clicked square
+            setLegalMoves(pieces[8 * senderRow + senderColumn][0]);                                 // displays all legal moves
         }
         else if (selectedRow === senderRow && selectedColumn === senderColumn) {                    // if clicked square is same as previously clicked square - deselect            
             setSelectedRow(null);                                                                   // clears previously selected row
@@ -163,8 +180,6 @@ export default function Board() {
         }
         return <>{rows}</>;             // returns entire board
     }
-
-    if (!areLegalMovesSet) setLegalMoves();     // sets legal moves if they are not set yet
 
     return <>{render()}</>              // renders entire board
 }

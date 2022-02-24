@@ -1,11 +1,10 @@
-function getLegalMoves(position) {
+export function getLegalMovesB(position) {
+}
+
+export function increasingDiagonal(position) {
 
 }
 
-function increasingDiagonal(position) {
-
-}
-
-function decreasingDiagonal(position) {
+export function decreasingDiagonal(position) {
     
 }

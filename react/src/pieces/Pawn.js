@@ -1,7 +1,6 @@
-function getLegalMoves(position, enPsassantSquare) {
+export function getLegalMovesP(position, enPsassantSquare) {
 
 }
-
 function push2Squares(position) {
 
 }
