@@ -1,18 +1,18 @@
 import React, {useState} from 'react';
-import './styles.css';                                                          // imports stylesheet
-import BlackBishop from './images/black-bishop.svg.png'                         // imports image - black bishop
-import BlackKnight from './images/black-knight.svg.png'                         // imports image - black knight
-import BlackPawn from './images/black-pawn.svg.png'                             // imports image - black pawn
-import BlackQueen from './images/black-queen.svg.png'                           // imports image - black queen
-import BlackRook from './images/black-rook.svg.png'                             // imports image - black rook
-import BlackKing from './images/black-king.svg.png'                             // imports image - black king
-import WhiteBishop from './images/white-bishop.svg.png'                         // imports image - white bishop
-import WhiteKnight from './images/white-knight.svg.png'                         // imports image - white knight
-import WhitePawn from './images/white-pawn.svg.png'                             // imports image - white pawn
-import WhiteQueen from './images/white-queen.svg.png'                           // imports image - white queen
-import WhiteRook from './images/white-rook.svg.png'                             // imports image - white rook
-import WhiteKing from './images/white-king.svg.png'                             // imports image - white bishop
-import Transparent from './images/transparent.png'                              // imports transparent image
+import '../styles/styles.css';                                                   // imports stylesheet
+import BlackBishop from '../images/black-bishop.svg.png'                         // imports image - black bishop
+import BlackKnight from '../images/black-knight.svg.png'                         // imports image - black knight
+import BlackPawn from '../images/black-pawn.svg.png'                             // imports image - black pawn
+import BlackQueen from '../images/black-queen.svg.png'                           // imports image - black queen
+import BlackRook from '../images/black-rook.svg.png'                             // imports image - black rook
+import BlackKing from '../images/black-king.svg.png'                             // imports image - black king
+import WhiteBishop from '../images/white-bishop.svg.png'                         // imports image - white bishop
+import WhiteKnight from '../images/white-knight.svg.png'                         // imports image - white knight
+import WhitePawn from '../images/white-pawn.svg.png'                             // imports image - white pawn
+import WhiteQueen from '../images/white-queen.svg.png'                           // imports image - white queen
+import WhiteRook from '../images/white-rook.svg.png'                             // imports image - white rook
+import WhiteKing from '../images/white-king.svg.png'                             // imports image - white bishop
+import Transparent from '../images/transparent.png'                              // imports transparent image
 
 export default function Square(props) {
     const [className, setClassName] = useState(null);                           // remembers, which class in styles.css should be used

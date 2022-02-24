@@ -1,4 +1,4 @@
-import Board from './Board.js'    // imports Board component
+import Board from './components/Board.js'    // imports Board component
 
 function App() {
   return (

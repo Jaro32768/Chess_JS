@@ -1,6 +1,6 @@
 import React, {useState} from 'react';
 import Square from './Square.js';       // imports Square component
-import './styles.css'                   // imports stylesheet
+import '../styles/styles.css'           // imports stylesheet
 
 let highlightedSquare = null;           // remembers which square should be highlighted
 let areLegalMovesSet = false;           // auxiliary variable to avoid infinite loop
