@@ -99,7 +99,6 @@ export default function Board() {
 
     // sets legal moves //
     const setLegalMoves = (selectedSquare) => {
-        resetLegalMoves();                  // resets legal moves
         let legalMoves = getLegalMoves(selectedSquare);
         for (let i = 0; i < 64; i++) {      // for each square on board
             if (legalMoves[i]) {                    // JUST PLACEHOLDER FOR NOW, SHOULD BE CHANGED TO CALL OF getLegalMoves() WHICH WILL BE COMPARED WITH INDEX
@@ -117,25 +116,26 @@ export default function Board() {
 
     // returns legal moves based on piece
     const getLegalMoves = (selectedSquare) => {
-        switch(selectedSquare) {
-            case 'white-pawn': case 'black-pawn': return getLegalMovesP();      // returns legal moves for pawn
-            case 'white-rook': case 'black-rook': return getLegalMovesR();      // returns legal moves for rook
-            case 'white-knight': case 'black-knight': return getLegalMovesN();  // returns legal moves for knight
-            case 'white-bishop': case 'black-bishop': return getLegalMovesB();  // returns legal moves for bishop
-            case 'white-queen': case 'black-queen': return getLegalMovesQ();    // returns legal moves for queen
-            case 'white-king': case 'black-king': return getLegalMovesK();      // returns legal moves for king
+        switch(pieces[selectedSquare][0]) {
+            case 'white-pawn': case 'black-pawn': return getLegalMovesP(selectedSquare);      // returns legal moves for pawn
+            case 'white-rook': case 'black-rook': return getLegalMovesR(selectedSquare);      // returns legal moves for rook
+            case 'white-knight': case 'black-knight': return getLegalMovesN(selectedSquare);  // returns legal moves for knight
+            case 'white-bishop': case 'black-bishop': return getLegalMovesB(selectedSquare);  // returns legal moves for bishop
+            case 'white-queen': case 'black-queen': return getLegalMovesQ(selectedSquare);    // returns legal moves for queen
+            case 'white-king': case 'black-king': return getLegalMovesK(selectedSquare);      // returns legal moves for king
         }
     }
     
     // makes move //
     const handleClick = (senderRow, senderColumn) => {
+        resetLegalMoves();                                                                          // resets legal moves
         if (selectedRow === null && selectedColumn === null && pieces[8 * senderRow + senderColumn][0] === null) return;    // if there is not any selected square now and before, it does nothing
         else if (pieces[8 * selectedRow + selectedColumn][0] === null ||                            // if clicked square is empty
             selectedRow === null) {                                                                 // or if this is first clicked square
             highlightedSquare = 8 * senderRow + senderColumn                                        // highlights selected square
             setSelectedRow(senderRow);                                                              // remembers row of clicked square
             setSelectedColumn(senderColumn);                                                        // remembers column of clicked square
-            setLegalMoves(pieces[8 * senderRow + senderColumn][0]);                                 // displays all legal moves
+            setLegalMoves(8 * senderRow + senderColumn);                                            // displays all legal moves
         }
         else if (selectedRow === senderRow && selectedColumn === senderColumn) {                    // if clicked square is same as previously clicked square - deselect            
             setSelectedRow(null);                                                                   // clears previously selected row
