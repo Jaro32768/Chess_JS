@@ -117,12 +117,12 @@ export default function Board() {
     // returns legal moves based on piece
     const getLegalMoves = (selectedSquare) => {
         switch(pieces[selectedSquare][0]) {
-            case 'white-pawn': case 'black-pawn': return getLegalMovesP(selectedSquare);      // returns legal moves for pawn
-            case 'white-rook': case 'black-rook': return getLegalMovesR(selectedSquare);      // returns legal moves for rook
-            case 'white-knight': case 'black-knight': return getLegalMovesN(selectedSquare);  // returns legal moves for knight
-            case 'white-bishop': case 'black-bishop': return getLegalMovesB(selectedSquare);  // returns legal moves for bishop
-            case 'white-queen': case 'black-queen': return getLegalMovesQ(selectedSquare);    // returns legal moves for queen
-            case 'white-king': case 'black-king': return getLegalMovesK(selectedSquare);      // returns legal moves for king
+            case 'white-pawn': case 'black-pawn': return getLegalMovesP(selectedSquare, pieces);        // returns legal moves for pawn
+            case 'white-rook': case 'black-rook': return getLegalMovesR(selectedSquare);                // returns legal moves for rook
+            case 'white-knight': case 'black-knight': return getLegalMovesN(selectedSquare);            // returns legal moves for knight
+            case 'white-bishop': case 'black-bishop': return getLegalMovesB(selectedSquare);            // returns legal moves for bishop
+            case 'white-queen': case 'black-queen': return getLegalMovesQ(selectedSquare);              // returns legal moves for queen
+            case 'white-king': case 'black-king': return getLegalMovesK(selectedSquare);                // returns legal moves for king
         }
     }
     
