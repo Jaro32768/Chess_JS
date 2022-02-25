@@ -40,11 +40,3 @@ export function getLegalMovesB(position, board) {
 
     return isLegal
 }
-
-export function increasingDiagonal(position) {
-
-}
-
-export function decreasingDiagonal(position) {
-    
-}
