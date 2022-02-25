@@ -121,7 +121,7 @@ export default function Board() {
             case 'white-rook': case 'black-rook': return getLegalMovesR(selectedSquare, pieces);        // returns legal moves for rook
             case 'white-knight': case 'black-knight': return getLegalMovesN(selectedSquare);            // returns legal moves for knight
             case 'white-bishop': case 'black-bishop': return getLegalMovesB(selectedSquare, pieces);    // returns legal moves for bishop
-            case 'white-queen': case 'black-queen': return getLegalMovesQ(selectedSquare);              // returns legal moves for queen
+            case 'white-queen': case 'black-queen': return getLegalMovesQ(selectedSquare, pieces);      // returns legal moves for queen
             case 'white-king': case 'black-king': return getLegalMovesK(selectedSquare);                // returns legal moves for king
         }
     }
