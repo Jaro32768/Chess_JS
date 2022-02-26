@@ -145,10 +145,10 @@ export default function Board(props) {
             highlightedSquare = null;                                                               // sets highlighted square to none
         }
         else {
-            resetLegalMoves();                                                                      // resets legal moves
-
-            
-
+            resetLegalMoves();                                                                      // resets legal moves            
+            if (pieces[8 * senderRow + senderColumn][0] === 'en-passant-square')
+                if (selectedRow === 3) pieces[8 * senderRow + senderColumn + 8][0] = null;
+                else pieces[8 * senderRow + senderColumn - 8][0] = null;
             pieces[8 * senderRow + senderColumn][0] = pieces[8 * selectedRow + selectedColumn][0];  // copies piece from previously clicked square to clicked square
             pieces[8 * selectedRow + selectedColumn][0] = null;                                     // removes piece from previously clicked square
             pieces.forEach(piece => { if (piece[0] === 'en-passant-square') piece[0] = null; });
@@ -165,7 +165,6 @@ export default function Board(props) {
                 props.showPromotionPopUp(false, 8 * senderRow + senderColumn);
         }
     }
-
 
     if (props.promotedTo !== null) {
         pieces[props.sender][0] = props.promotedTo;
