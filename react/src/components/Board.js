@@ -146,15 +146,23 @@ export default function Board(props) {
         }
         else {
             resetLegalMoves();                                                                      // resets legal moves
+
+            
+
             pieces[8 * senderRow + senderColumn][0] = pieces[8 * selectedRow + selectedColumn][0];  // copies piece from previously clicked square to clicked square
             pieces[8 * selectedRow + selectedColumn][0] = null;                                     // removes piece from previously clicked square
+            pieces.forEach(piece => { if (piece[0] === 'en-passant-square') piece[0] = null; });
+            if (selectedColumn === senderColumn && (selectedRow === senderRow + 2 && pieces[8 * senderRow + senderColumn][0] === 'white-pawn'))
+                pieces[8 * senderRow + senderColumn + 8][0] = 'en-passant-square';
+            else if (selectedColumn === senderColumn && (selectedRow === senderRow - 2 && pieces[8 * senderRow + senderColumn][0] === 'black-pawn'))
+                pieces[8 * senderRow + senderColumn - 8][0] = 'en-passant-square';
             setSelectedRow(null);                                                                   // clears previously selected row
             setSelectedColumn(null);                                                                // clears previously selected column
             highlightedSquare = null;                                                               // sets highlighted square to none
             if (pieces[8 * senderRow + senderColumn][0] === 'white-pawn' && senderRow === 0)           
                 props.showPromotionPopUp(true, 8 * senderRow + senderColumn);
-            else if (pieces[8 * senderRow + senderColumn][0] === 'black-pawn' && senderRow === 7){
-                props.showPromotionPopUp(false, 8 * senderRow + senderColumn);}
+            else if (pieces[8 * senderRow + senderColumn][0] === 'black-pawn' && senderRow === 7)
+                props.showPromotionPopUp(false, 8 * senderRow + senderColumn);
         }
     }
 
