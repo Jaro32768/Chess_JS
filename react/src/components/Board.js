@@ -128,21 +128,24 @@ export default function Board() {
     
     // makes move //
     const handleClick = (senderRow, senderColumn) => {
-        resetLegalMoves();                                                                          // resets legal moves
         if (selectedRow === null && selectedColumn === null && pieces[8 * senderRow + senderColumn][0] === null) return;    // if there is not any selected square now and before, it does nothing
         else if (pieces[8 * selectedRow + selectedColumn][0] === null ||                            // if clicked square is empty
             selectedRow === null) {                                                                 // or if this is first clicked square
             highlightedSquare = 8 * senderRow + senderColumn                                        // highlights selected square
             setSelectedRow(senderRow);                                                              // remembers row of clicked square
             setSelectedColumn(senderColumn);                                                        // remembers column of clicked square
+            resetLegalMoves();                                                                      // resets legal moves
             setLegalMoves(8 * senderRow + senderColumn);                                            // displays all legal moves
         }
-        else if (selectedRow === senderRow && selectedColumn === senderColumn) {                    // if clicked square is same as previously clicked square - deselect            
+        else if (selectedRow === senderRow && selectedColumn === senderColumn ||                    // if clicked square is same as previously clicked square - deselect            
+                !pieces[8 * senderRow + senderColumn][1]) {                                         // if it is illegal move
+            resetLegalMoves();                                                                      // resets legal moves
             setSelectedRow(null);                                                                   // clears previously selected row
             setSelectedColumn(null);                                                                // clears previously selected column
             highlightedSquare = null;                                                               // sets highlighted square to none
         }
         else {
+            resetLegalMoves();                                                                      // resets legal moves
             pieces[8 * senderRow + senderColumn][0] = pieces[8 * selectedRow + selectedColumn][0];  // copies piece from previously clicked square to clicked square
             pieces[8 * selectedRow + selectedColumn][0] = null;                                     // removes piece from previously clicked square
             setSelectedRow(null);                                                                   // clears previously selected row
