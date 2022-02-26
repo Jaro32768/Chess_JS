@@ -128,7 +128,9 @@ export default function Board(props) {
     
     // makes move //
     const handleClick = (senderRow, senderColumn) => {
-        if (selectedRow === null && selectedColumn === null && pieces[8 * senderRow + senderColumn][0] === null) return;    // if there is not any selected square now and before, it does nothing
+        if ((selectedRow === null && selectedColumn === null && pieces[8 * senderRow + senderColumn][0] === null) ||
+            (selectedRow === null && selectedColumn === null && pieces[8 * senderRow + senderColumn][0] === 'en-passant-square'))
+         return;    // if there is not any selected square now and before, it does nothing
         else if (pieces[8 * selectedRow + selectedColumn][0] === null ||                            // if clicked square is empty
             selectedRow === null) {                                                                 // or if this is first clicked square
             highlightedSquare = 8 * senderRow + senderColumn                                        // highlights selected square
