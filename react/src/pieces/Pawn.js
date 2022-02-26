@@ -28,7 +28,3 @@ export function getLegalMovesP(position, board, enPsassantSquare) {
 function enPassant(position) {
 
 }
-
-function promote(position) {
-
-}

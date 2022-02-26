@@ -92,7 +92,7 @@ const pieces = [                        // content of each position on board - [
     [ 'white-rook', false ]             // notation: h1     row: 7     column: 7
 ]
 
-export default function Board() {
+export default function Board(props) {
     const [selectedRow, setSelectedRow] = useState(null);           // stores row of previously clicked square
     const [selectedColumn, setSelectedColumn] = useState(null);     // stores column of previously clicked square
 
@@ -137,7 +137,7 @@ export default function Board() {
             resetLegalMoves();                                                                      // resets legal moves
             setLegalMoves(8 * senderRow + senderColumn);                                            // displays all legal moves
         }
-        else if (selectedRow === senderRow && selectedColumn === senderColumn ||                    // if clicked square is same as previously clicked square - deselect            
+        else if ((selectedRow === senderRow && selectedColumn === senderColumn) ||                    // if clicked square is same as previously clicked square - deselect            
                 !pieces[8 * senderRow + senderColumn][1]) {                                         // if it is illegal move
             resetLegalMoves();                                                                      // resets legal moves
             setSelectedRow(null);                                                                   // clears previously selected row
@@ -151,7 +151,17 @@ export default function Board() {
             setSelectedRow(null);                                                                   // clears previously selected row
             setSelectedColumn(null);                                                                // clears previously selected column
             highlightedSquare = null;                                                               // sets highlighted square to none
+            if (pieces[8 * senderRow + senderColumn][0] === 'white-pawn' && senderRow === 0)           
+                props.showPromotionPopUp(true, 8 * senderRow + senderColumn);
+            else if (pieces[8 * senderRow + senderColumn][0] === 'black-pawn' && senderRow === 7){
+                props.showPromotionPopUp(false, 8 * senderRow + senderColumn);}
         }
+    }
+
+
+    if (props.promotedTo !== null) {
+        pieces[props.sender][0] = props.promotedTo;
+        props.received();
     }
 
     // renders 1 square //
@@ -163,6 +173,7 @@ export default function Board() {
                        handleClick={handleClick}                                                    // passes handleClick() to Square so it may be used
                        isSelected={(highlightedSquare === piecesIndex) ? true : false}              // should square be highlighted
                        isPossibleToMoveThere={pieces[piecesIndex][1]}                               // should square be marked as legal move
+                       color={true}                                                                 // should be colored
                        />;                                                                          // returns square
     }
 
