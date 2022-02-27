@@ -1,4 +1,4 @@
-export function getLegalMovesK(position, board) {
+export function getLegalMovesK(position, board, kingMoved, aRookMoved, hRookMoved) {
     // this array is showing if it is allowed to go there //
     let isLegal = [false, false, false, false, false, false, false, false,
                    false, false, false, false, false, false, false, false,
@@ -41,14 +41,11 @@ export function getLegalMovesK(position, board) {
         ((board[position][0].includes('white') && !board[position - 1][0]?.includes('white')) ||
         (board[position][0].includes('black') && !board[position - 1][0]?.includes('black')))) 
         isLegal[position - 1] = true;
-
+    if (kingMoved || (aRookMoved && hRookMoved))
+        return isLegal;
+    if (!(kingMoved || aRookMoved) && board[position - 1][0] === null && board[position - 2][0] === null && board[position - 3][0] === null)
+        isLegal[position - 2] = true;
+    if (!(kingMoved || hRookMoved) && board[position + 1][0] === null && board[position + 2][0] === null)
+        isLegal[position + 2] = true;
     return isLegal;
-}
-
-function longCastle() {
-
-}
-
-function shortCastle() {
-
 }

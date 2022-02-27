@@ -8,7 +8,10 @@ import {getLegalMovesB} from '../pieces/Bishop.js'; // imports method that searc
 import {getLegalMovesQ} from '../pieces/Queen.js';  // imports method that searches for legal moves for queen
 import {getLegalMovesK} from '../pieces/King.js';   // imports method that searches for legal moves for king
 
-let highlightedSquare = null;           // remembers which square should be highlighted
+let highlightedSquare = null,           // remembers which square should be highlighted
+    whiteKingMoved = false, blackKingMoved = false,
+    whiteARookMoved = false, blackARookMoved = false,
+    whiteHRookMoved = false, blackHRookMoved = false;
 
 const pieces = [                        // content of each position on board - [ pieceOnSquare , isPossibleToMoveThere ]
     // 8TH RANK //
@@ -122,7 +125,8 @@ export default function Board(props) {
             case 'white-knight': case 'black-knight': return getLegalMovesN(selectedSquare, pieces);    // returns legal moves for knight
             case 'white-bishop': case 'black-bishop': return getLegalMovesB(selectedSquare, pieces);    // returns legal moves for bishop
             case 'white-queen': case 'black-queen': return getLegalMovesQ(selectedSquare, pieces);      // returns legal moves for queen
-            case 'white-king': case 'black-king': return getLegalMovesK(selectedSquare, pieces);        // returns legal moves for king
+            case 'white-king': return getLegalMovesK(selectedSquare, pieces, whiteKingMoved, whiteARookMoved, whiteHRookMoved);        // returns legal moves for white king
+            case 'black-king': return getLegalMovesK(selectedSquare, pieces, blackKingMoved, blackARookMoved, blackHRookMoved);        // returns legal moves for black king
         }
     }
     
@@ -147,8 +151,25 @@ export default function Board(props) {
             highlightedSquare = null;                                                               // sets highlighted square to none
         }
         else {
-            resetLegalMoves();                                                                      // resets legal moves            
-            if (pieces[8 * senderRow + senderColumn][0] === 'en-passant-square')
+            resetLegalMoves();                                                                      // resets legal moves     
+
+            if (pieces[8 * selectedRow + selectedColumn][0] === 'white-rook') {
+                if (8 * selectedRow + selectedColumn === 56) whiteARookMoved = true;
+                else if (8 * selectedRow + selectedColumn === 63) whiteHRookMoved = true;
+            }
+            else if (pieces[8 * selectedRow + selectedColumn][0] === 'black-rook') {
+                if (8 * selectedRow + selectedColumn === 0) blackARookMoved = true;
+                else if (8 * selectedRow + selectedColumn === 7) blackHRookMoved = true;
+            }
+            else if (pieces[8 * selectedRow + selectedColumn][0] === 'white-king') {
+                whiteKingMoved = true;
+                castle(senderRow, senderColumn, selectedRow, selectedColumn);
+            }
+            else if (pieces[8 * selectedRow + selectedColumn][0] === 'black-king') {
+                blackKingMoved = true;
+                castle(senderRow, senderColumn, selectedRow, selectedColumn);
+            }
+            else if (pieces[8 * senderRow + senderColumn][0] === 'en-passant-square')
                 if (selectedRow === 3) pieces[8 * senderRow + senderColumn + 8][0] = null;
                 else pieces[8 * senderRow + senderColumn - 8][0] = null;
             pieces[8 * senderRow + senderColumn][0] = pieces[8 * selectedRow + selectedColumn][0];  // copies piece from previously clicked square to clicked square
@@ -167,6 +188,18 @@ export default function Board(props) {
                 props.showPromotionPopUp(false, 8 * senderRow + senderColumn);
         }
     }
+
+    const castle = (senderRow, senderColumn, selectedRow, selectedColumn) => {        
+        if (senderRow === selectedRow && senderColumn === selectedColumn - 2) {
+            pieces[8 * selectedRow + selectedColumn - 1][0] = pieces[8 * selectedRow + selectedColumn - 4][0];
+            pieces[8 * selectedRow + selectedColumn - 4][0] = null; 
+        }
+        else if (senderRow === selectedRow && senderColumn === selectedColumn + 2){
+            pieces[8 * selectedRow + selectedColumn + 1][0] = pieces[8 * selectedRow + selectedColumn + 3][0];
+            pieces[8 * selectedRow + selectedColumn + 3][0] = null; 
+        }
+    }
+
 
     if (props.promotedTo !== null) {
         pieces[props.sender][0] = props.promotedTo;
