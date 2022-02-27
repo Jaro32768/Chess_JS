@@ -11,7 +11,8 @@ import {getLegalMovesK} from '../pieces/King.js';   // imports method that searc
 let highlightedSquare = null,           // remembers which square should be highlighted
     whiteKingMoved = false, blackKingMoved = false,
     whiteARookMoved = false, blackARookMoved = false,
-    whiteHRookMoved = false, blackHRookMoved = false;
+    whiteHRookMoved = false, blackHRookMoved = false,
+    isWhitesMove = true;
 
 const pieces = [                        // content of each position on board - [ pieceOnSquare , isPossibleToMoveThere ]
     // 8TH RANK //
@@ -133,7 +134,9 @@ export default function Board(props) {
     // makes move //
     const handleClick = (senderRow, senderColumn) => {
         if ((selectedRow === null && selectedColumn === null && pieces[8 * senderRow + senderColumn][0] === null) ||
-            (selectedRow === null && selectedColumn === null && pieces[8 * senderRow + senderColumn][0] === 'en-passant-square'))
+            (selectedRow === null && selectedColumn === null && pieces[8 * senderRow + senderColumn][0] === 'en-passant-square') ||
+            (selectedRow === null && selectedColumn === null && pieces[8 * senderRow + senderColumn][0]?.includes('black') && isWhitesMove) ||
+            (selectedRow === null && selectedColumn === null && pieces[8 * senderRow + senderColumn][0]?.includes('white') && !isWhitesMove))
          return;    // if there is not any selected square now and before, it does nothing
         else if (pieces[8 * selectedRow + selectedColumn][0] === null ||                            // if clicked square is empty
             selectedRow === null) {                                                                 // or if this is first clicked square
@@ -152,7 +155,7 @@ export default function Board(props) {
         }
         else {
             resetLegalMoves();                                                                      // resets legal moves     
-
+            isWhitesMove = !isWhitesMove;
             if (pieces[8 * selectedRow + selectedColumn][0] === 'white-rook') {
                 if (8 * selectedRow + selectedColumn === 56) whiteARookMoved = true;
                 else if (8 * selectedRow + selectedColumn === 63) whiteHRookMoved = true;
