@@ -1,5 +1,5 @@
-import { useState } from 'react'
-import Board from './components/Board.js'    // imports Board component
+import { useState } from 'react';
+import Board from './components/Board.js';    // imports Board component
 import PromotionPopUp from './components/PromotionPopUp.js';
 
 function App() {

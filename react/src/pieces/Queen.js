@@ -1,5 +1,5 @@
-import {getLegalMovesB} from './Bishop.js'
-import {getLegalMovesR} from './Rook.js'
+import {getLegalMovesB} from './Bishop.js';
+import {getLegalMovesR} from './Rook.js';
 
 export function getLegalMovesQ(position, board) {    
     // this array is showing if it is allowed to go there //

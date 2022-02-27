@@ -1,5 +1,5 @@
-import React from 'react'
-import Square from './Square.js'
+import React from 'react';
+import Square from './Square.js';
 
 export default function PromotionPopUp(props) {
     const pieces = [['white-knight', 'white-bishop', 'white-rook', 'white-queen'], ['black-knight', 'black-bishop', 'black-rook', 'black-queen']];

@@ -1,6 +1,6 @@
 import React, {useState} from 'react';
 import Square from './Square.js';                   // imports Square component
-import '../styles/styles.css'                       // imports stylesheet
+import '../styles/styles.css';                      // imports stylesheet
 import {getLegalMovesP} from '../pieces/Pawn.js';   // imports method that searches for legal moves for pawn
 import {getLegalMovesR} from '../pieces/Rook.js';   // imports method that searches for legal moves for rook
 import {getLegalMovesN} from '../pieces/Knight.js'; // imports method that searches for legal moves for knight
