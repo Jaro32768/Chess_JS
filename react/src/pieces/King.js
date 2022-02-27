@@ -43,9 +43,9 @@ export function getLegalMovesK(position, board, kingMoved, aRookMoved, hRookMove
         isLegal[position - 1] = true;
     if (kingMoved || (aRookMoved && hRookMoved))
         return isLegal;
-    if (!(kingMoved || aRookMoved) && board[position - 1][0] === null && board[position - 2][0] === null && board[position - 3][0] === null)
+    if (!(kingMoved || aRookMoved) && board[position - 1][0] === null && board[position - 2][0] === null && board[position - 3][0] === null && board[position - 4][0]?.includes('rook'))
         isLegal[position - 2] = true;
-    if (!(kingMoved || hRookMoved) && board[position + 1][0] === null && board[position + 2][0] === null)
+    if (!(kingMoved || hRookMoved) && board[position + 1][0] === null && board[position + 2][0] === null && board[position + 3][0]?.includes('rook'))
         isLegal[position + 2] = true;
     return isLegal;
 }
