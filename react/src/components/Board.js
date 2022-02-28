@@ -8,11 +8,11 @@ import {getLegalMovesB} from '../pieces/Bishop.js'; // imports method that searc
 import {getLegalMovesQ} from '../pieces/Queen.js';  // imports method that searches for legal moves for queen
 import {getLegalMovesK} from '../pieces/King.js';   // imports method that searches for legal moves for king
 
-let highlightedSquare = null,           // remembers which square should be highlighted
-    whiteKingMoved = false, blackKingMoved = false,
-    whiteARookMoved = false, blackARookMoved = false,
-    whiteHRookMoved = false, blackHRookMoved = false,
-    isWhitesMove = true;
+let highlightedSquare = null,                           // remembers which square should be highlighted
+    whiteKingMoved = false, blackKingMoved = false,     // remembers if kings moved
+    whiteARookMoved = false, blackARookMoved = false,   // remembers if a rooks moved
+    whiteHRookMoved = false, blackHRookMoved = false,   // remembers if h rooks moved
+    isWhitesMove = true;                                // remembers who's move it is
 
 const pieces = [                        // content of each position on board - [ pieceOnSquare , isPossibleToMoveThere ]
     // 8TH RANK //
@@ -133,11 +133,11 @@ export default function Board(props) {
     
     // makes move //
     const handleClick = (senderRow, senderColumn) => {
-        if ((selectedRow === null && selectedColumn === null && pieces[8 * senderRow + senderColumn][0] === null) ||
-            (selectedRow === null && selectedColumn === null && pieces[8 * senderRow + senderColumn][0] === 'en-passant-square') ||
-            (selectedRow === null && selectedColumn === null && pieces[8 * senderRow + senderColumn][0]?.includes('black') && isWhitesMove) ||
-            (selectedRow === null && selectedColumn === null && pieces[8 * senderRow + senderColumn][0]?.includes('white') && !isWhitesMove))
-         return;    // if there is not any selected square now and before, it does nothing
+        if ((selectedRow === null && selectedColumn === null && pieces[8 * senderRow + senderColumn][0] === null) ||                            // if there is not any selected square now and before
+            (selectedRow === null && selectedColumn === null && pieces[8 * senderRow + senderColumn][0] === 'en-passant-square') ||             // or if there is nothing selected before and now en passant square is selected
+            (selectedRow === null && selectedColumn === null && pieces[8 * senderRow + senderColumn][0]?.includes('black') && isWhitesMove) ||  // or if it is white's move and black's piece is about to be selected
+            (selectedRow === null && selectedColumn === null && pieces[8 * senderRow + senderColumn][0]?.includes('white') && !isWhitesMove))   // of it it is black's move and white's piece is about to be selected
+         return;                                                                                                                                // it does nothing
         else if (pieces[8 * selectedRow + selectedColumn][0] === null ||                            // if clicked square is empty
             selectedRow === null) {                                                                 // or if this is first clicked square
             highlightedSquare = 8 * senderRow + senderColumn                                        // highlights selected square
@@ -153,60 +153,64 @@ export default function Board(props) {
             setSelectedColumn(null);                                                                // clears previously selected column
             highlightedSquare = null;                                                               // sets highlighted square to none
         }
-        else {
+        else {                                                                                      // if move is valid
             resetLegalMoves();                                                                      // resets legal moves     
-            isWhitesMove = !isWhitesMove;
-            if (pieces[8 * selectedRow + selectedColumn][0] === 'white-rook') {
-                if (8 * selectedRow + selectedColumn === 56) whiteARookMoved = true;
-                else if (8 * selectedRow + selectedColumn === 63) whiteHRookMoved = true;
+            isWhitesMove = !isWhitesMove;                                                           // flips turn white <---> black
+            if (pieces[8 * selectedRow + selectedColumn][0] === 'white-rook') {                     // if white rook moved
+                if (8 * selectedRow + selectedColumn === 56) whiteARookMoved = true;                // if white a rook moved, it is rememberd in variable
+                else if (8 * selectedRow + selectedColumn === 63) whiteHRookMoved = true;           // if white h rook moved, it is rememberd in variable
             }
-            else if (pieces[8 * selectedRow + selectedColumn][0] === 'black-rook') {
-                if (8 * selectedRow + selectedColumn === 0) blackARookMoved = true;
-                else if (8 * selectedRow + selectedColumn === 7) blackHRookMoved = true;
+            else if (pieces[8 * selectedRow + selectedColumn][0] === 'black-rook') {                // if black rook moved
+                if (8 * selectedRow + selectedColumn === 0) blackARookMoved = true;                 // if black a rook moved, it is rememberd in variable
+                else if (8 * selectedRow + selectedColumn === 7) blackHRookMoved = true;            // if black h rook moved, it is rememberd in variable
             }
-            else if (pieces[8 * selectedRow + selectedColumn][0] === 'white-king') {
-                whiteKingMoved = true;
-                castle(senderRow, senderColumn, selectedRow, selectedColumn);
+            else if (pieces[8 * selectedRow + selectedColumn][0] === 'white-king') {                // if white king moved
+                whiteKingMoved = true;                                                              // it is rememberd in variable                          
+                castle(senderRow, senderColumn, selectedRow, selectedColumn);                       // checks if the move is castle and if it is, it castles
             }
-            else if (pieces[8 * selectedRow + selectedColumn][0] === 'black-king') {
-                blackKingMoved = true;
-                castle(senderRow, senderColumn, selectedRow, selectedColumn);
+            else if (pieces[8 * selectedRow + selectedColumn][0] === 'black-king') {                // if black king moved
+                blackKingMoved = true;                                                              // it is rememberd in variable                          
+                castle(senderRow, senderColumn, selectedRow, selectedColumn);                       // checks if the move is castle and if it is, it castles
             }
-            else if (pieces[8 * senderRow + senderColumn][0] === 'en-passant-square')
-                if (selectedRow === 3) pieces[8 * senderRow + senderColumn + 8][0] = null;
-                else pieces[8 * senderRow + senderColumn - 8][0] = null;
+            else if (pieces[8 * senderRow + senderColumn][0] === 'en-passant-square')               // if en passant is being attempted
+                if (selectedRow === 3) pieces[8 * senderRow + senderColumn + 8][0] = null;          // if white is trying to en passant en passanted pawn is removed
+                else pieces[8 * senderRow + senderColumn - 8][0] = null;                            // if black is trying to en passant en passanted pawn is removed
             pieces[8 * senderRow + senderColumn][0] = pieces[8 * selectedRow + selectedColumn][0];  // copies piece from previously clicked square to clicked square
             pieces[8 * selectedRow + selectedColumn][0] = null;                                     // removes piece from previously clicked square
-            pieces.forEach(piece => { if (piece[0] === 'en-passant-square') piece[0] = null; });
-            if (selectedColumn === senderColumn && (selectedRow === senderRow + 2 && pieces[8 * senderRow + senderColumn][0] === 'white-pawn'))
-                pieces[8 * senderRow + senderColumn + 8][0] = 'en-passant-square';
-            else if (selectedColumn === senderColumn && (selectedRow === senderRow - 2 && pieces[8 * senderRow + senderColumn][0] === 'black-pawn'))
-                pieces[8 * senderRow + senderColumn - 8][0] = 'en-passant-square';
+            pieces.forEach(piece => { if (piece[0] === 'en-passant-square') piece[0] = null; });    // removes all en passant squares
+            if (selectedColumn === senderColumn && (selectedRow === senderRow + 2 &&                // if something is moved by 2 squares forward  
+                pieces[8 * senderRow + senderColumn][0] === 'white-pawn'))                          // and it is white pawn                        
+                    pieces[8 * senderRow + senderColumn + 8][0] = 'en-passant-square';              // square behind pawn becomes en passant square
+            else if (selectedColumn === senderColumn && (selectedRow === senderRow - 2 &&           // if something is moved by 2 squares forward  
+                pieces[8 * senderRow + senderColumn][0] === 'black-pawn'))                          // and it is white pawn                        
+                    pieces[8 * senderRow + senderColumn - 8][0] = 'en-passant-square';              // square behind pawn becomes en passant square
             setSelectedRow(null);                                                                   // clears previously selected row
             setSelectedColumn(null);                                                                // clears previously selected column
             highlightedSquare = null;                                                               // sets highlighted square to none
-            if (pieces[8 * senderRow + senderColumn][0] === 'white-pawn' && senderRow === 0)           
-                props.showPromotionPopUp(true, 8 * senderRow + senderColumn);
-            else if (pieces[8 * senderRow + senderColumn][0] === 'black-pawn' && senderRow === 7)
-                props.showPromotionPopUp(false, 8 * senderRow + senderColumn);
+            if (pieces[8 * senderRow + senderColumn][0] === 'white-pawn' && senderRow === 0)        // if white pawn reaches last rank
+                props.showPromotionPopUp(true, 8 * senderRow + senderColumn);                       // show promotion popup for white
+            else if (pieces[8 * senderRow + senderColumn][0] === 'black-pawn' && senderRow === 7)   // if black pawn reaches last rank
+                props.showPromotionPopUp(false, 8 * senderRow + senderColumn);                      // show promotion popup for black
         }
     }
 
+
+    // checks, if player is trying to castle and if he is it castles //
     const castle = (senderRow, senderColumn, selectedRow, selectedColumn) => {        
-        if (senderRow === selectedRow && senderColumn === selectedColumn - 2) {
-            pieces[8 * selectedRow + selectedColumn - 1][0] = pieces[8 * selectedRow + selectedColumn - 4][0];
-            pieces[8 * selectedRow + selectedColumn - 4][0] = null; 
+        if (senderRow === selectedRow && senderColumn === selectedColumn - 2) {                                 // if trying to castle queenside
+            pieces[8 * selectedRow + selectedColumn - 1][0] = pieces[8 * selectedRow + selectedColumn - 4][0];  // copy rook to the right side of the king
+            pieces[8 * selectedRow + selectedColumn - 4][0] = null;                                             // original rook is removed
         }
-        else if (senderRow === selectedRow && senderColumn === selectedColumn + 2){
-            pieces[8 * selectedRow + selectedColumn + 1][0] = pieces[8 * selectedRow + selectedColumn + 3][0];
-            pieces[8 * selectedRow + selectedColumn + 3][0] = null; 
+        else if (senderRow === selectedRow && senderColumn === selectedColumn + 2){                             // if trying to castle kingside
+            pieces[8 * selectedRow + selectedColumn + 1][0] = pieces[8 * selectedRow + selectedColumn + 3][0];  // copy rook to the left side of the king
+            pieces[8 * selectedRow + selectedColumn + 3][0] = null;                                             // original rook is removed
         }
     }
 
 
-    if (props.promotedTo !== null) {
-        pieces[props.sender][0] = props.promotedTo;
-        props.received();
+    if (props.promotedTo !== null) {                    // if receives piece pawn is promoted to
+        pieces[props.sender][0] = props.promotedTo;     // places this piece on the board
+        props.received();                               // sends back message that it was successfull
     }
 
     // renders 1 square //

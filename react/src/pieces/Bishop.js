@@ -9,6 +9,7 @@ export function getLegalMovesB(position, board) {
                    false, false, false, false, false, false, false, false,
                    false, false, false, false, false, false, false, false];
     
+    // bottom right from bishop
     for (let i = 1; i < Math.min(8 - (position % 8), 8 - Math.floor(position / 8)); i++) {
         if ((board[position][0].includes('white') && board[position + i + 8 * i][0]?.includes('white')) ||
             (board[position][0].includes('black') && board[position + i + 8 * i][0]?.includes('black'))) break;
@@ -16,13 +17,15 @@ export function getLegalMovesB(position, board) {
         if ((board[position][0].includes('white') && board[position + i + 8 * i][0]?.includes('black')) ||
             (board[position][0].includes('black') && board[position + i + 8 * i][0]?.includes('white'))) break;
     }
+    // top right from bishop
     for (let i = 1; i < Math.min(8 - (position % 8), 1 + Math.floor(position / 8)); i++) {
         if ((board[position][0].includes('white') && board[position + i - 8 * i][0]?.includes('white')) ||
             (board[position][0].includes('black') && board[position + i - 8 * i][0]?.includes('black'))) break;
             isLegal[position + i - 8 * i] = true;
         if ((board[position][0].includes('white') && board[position + i - 8 * i][0]?.includes('black')) ||
             (board[position][0].includes('black') && board[position + i - 8 * i][0]?.includes('white'))) break;
-    }    
+    }  
+    // top left from bishop
     for (let i = 1; i < Math.min(1 + (position % 8), 1 + Math.floor(position / 8)); i++) {
         if ((board[position][0].includes('white') && board[position - i - 8 * i][0]?.includes('white')) ||
             (board[position][0].includes('black') && board[position - i - 8 * i][0]?.includes('black'))) break;
@@ -30,6 +33,7 @@ export function getLegalMovesB(position, board) {
         if ((board[position][0].includes('white') && board[position - i - 8 * i][0]?.includes('black')) ||
             (board[position][0].includes('black') && board[position - i - 8 * i][0]?.includes('white'))) break;
     }
+    // bottom left from bishop 
     for (let i = 1; i < Math.min(1 + (position % 8), 8 - Math.floor(position / 8)); i++) {
         if ((board[position][0].includes('white') && board[position - i + 8 * i][0]?.includes('white')) ||
             (board[position][0].includes('black') && board[position - i + 8 * i][0]?.includes('black'))) break;
@@ -37,6 +41,5 @@ export function getLegalMovesB(position, board) {
         if ((board[position][0].includes('white') && board[position - i + 8 * i][0]?.includes('black')) ||
             (board[position][0].includes('black') && board[position - i + 8 * i][0]?.includes('white'))) break;
     }
-
-    return isLegal
+    return isLegal          // return legal moves
 }

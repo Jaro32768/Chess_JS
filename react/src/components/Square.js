@@ -44,7 +44,7 @@ export default function Square(props) {
     }
 
     const renderImage = () => {
-        return <img className={props.color ? (!props.isSelected ? (props.isPossibleToMoveThere ? 'imgPiece possibleMove' : 'imgPiece') : 'imgPiece selectedSquare') : 'promotionPopUpImg'}
+        return <img className={props.color ? (!props.isSelected ? (props.isPossibleToMoveThere ? 'imgPiece possibleMove' : 'imgPiece') : 'imgPiece selectedSquare') : 'promotionPopUpImg'}      // gives needed classnames to image
                     alt={props.piece} src={image}></img>;                       // renders image
     }
 

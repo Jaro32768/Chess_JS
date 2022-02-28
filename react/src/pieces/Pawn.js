@@ -10,17 +10,19 @@ export function getLegalMovesP(position, board, enPsassantSquare) {
                    false, false, false, false, false, false, false, false];
 
     if (board[position][0] === 'white-pawn') {
-        if (board[position - 8][0] === null) isLegal[position - 8] = true;
-        if (Math.floor(position / 8) === 6 && board[position - 16][0] === null && board[position - 8][0] === null) isLegal[position - 16] = true;
+        if (board[position - 8][0] === null) isLegal[position - 8] = true;          // if possible to push, add it to legal moves
+        if (Math.floor(position / 8) === 6 && board[position - 16][0] === null && board[position - 8][0] === null) isLegal[position - 16] = true;       // if possible to push 2 squares, add it to legal moves
+        // if en passant is possible, add it to legal moves //
         if (position % 8 !== 7 && board[position - 7][0] !== null && (board[position - 7][0]?.includes('black') || (board[position - 7][0] === 'en-passant-square' && Math.floor(position / 8) === 3))) isLegal[position - 7] = true;
         if (position % 8 !== 0 && board[position - 9][0] !== null && (board[position - 9][0]?.includes('black') || (board[position - 9][0] === 'en-passant-square' && Math.floor(position / 8) === 3))) isLegal[position - 9] = true;
     }
-    else {
+    else {                                                                          // if possible to push, add it to legal moves
         if (board[position + 8][0] === null) isLegal[position + 8] = true;
-        if (Math.floor(position / 8) === 1 && board[position + 16][0] === null && board[position + 8][0] === null) isLegal[position + 16] = true;
+        if (Math.floor(position / 8) === 1 && board[position + 16][0] === null && board[position + 8][0] === null) isLegal[position + 16] = true;       // if possible to push 2 squares, add it to legal moves
+        // if en passant is possible, add it to legal moves //
         if (position % 8 !== 0 && board[position + 7][0] !== null && (board[position + 7][0]?.includes('white') || (board[position + 7][0] === 'en-passant-square' && Math.floor(position / 8) === 4))) isLegal[position + 7] = true;
         if (position % 8 !== 7 && board[position + 9][0] !== null && (board[position + 9][0]?.includes('white') || (board[position + 9][0] === 'en-passant-square' && Math.floor(position / 8) === 4))) isLegal[position + 9] = true;
     }
 
-    return isLegal;
+    return isLegal;             // return legal moves
 }
