@@ -1,40 +1,32 @@
-import { positionToRow, positionToColumn, positionIncludesWhite, positionIncludesBlack, positionIncludesRook } from "../FormatTranslator";
+import { positionToRow, positionToColumn, positionIncludesBothAndNot, positionIncludesRook } from "../Functions";
 
 export function getLegalMovesK(position, board, kingMoved, aRookMoved, hRookMoved) {
     // this array is showing if it is allowed to go there //
     let isLegal = new Array(64).fill(false);
 
-    if ((positionToColumn(position) > 0 && positionToRow(position) > 0) &&       // you have to stay inside board
-        ((positionIncludesWhite(board, position) && !positionIncludesWhite(board, position - 9)) ||                                 // you can not capture own piece
-        (positionIncludesBlack(board, position) && !positionIncludesBlack(board, position - 9))))                                   // you can not capture own piece
+    if (positionToColumn(position) > 0 && positionToRow(position) > 0 &&    // you have to stay inside board
+        positionIncludesBothAndNot(board, position, position - 9))          // you can not capture own piece
         isLegal[position - 9] = true;       // x : - 1 , y - 1 : 
-    if ((positionToRow(position) > 0) &&                           // you have to stay inside board
-        ((positionIncludesWhite(board, position) && !positionIncludesWhite(board, position - 8)) ||                                 // you can not capture own piece
-        (positionIncludesBlack(board, position) && !positionIncludesBlack(board, position - 8))))                                   // you can not capture own piece
+    if (positionToRow(position) > 0 &&                                      // you have to stay inside board
+        positionIncludesBothAndNot(board, position, position - 8))          // you can not capture own piece
         isLegal[position - 8] = true;       // x : 0 , y : - 1
-    if ((positionToColumn(position) < 7 && positionToRow(position) > 0) &&       // you have to stay inside board
-        ((positionIncludesWhite(board, position) && !positionIncludesWhite(board, position - 7)) ||                                 // you can not capture own piece
-        (positionIncludesBlack(board, position) && !positionIncludesBlack(board, position - 7))) && positionToRow(position) > 0)    // you can not capture own piece
+    if (positionToColumn(position) < 7 && positionToRow(position) > 0 &&    // you have to stay inside board
+        positionIncludesBothAndNot(board, position, position - 7))          // you can not capture own piece
         isLegal[position - 7] = true;       // x : - 1 , y : + 1
-    if ((positionToColumn(position) < 7) &&                                       // you have to stay inside board
-        ((positionIncludesWhite(board, position) && !positionIncludesWhite(board, position + 1)) ||                                 // you can not capture own piece
-        (positionIncludesBlack(board, position) && !positionIncludesBlack(board, position + 1))))                                   // you can not capture own piece
+    if (positionToColumn(position) < 7 &&                                   // you have to stay inside board
+        positionIncludesBothAndNot(board, position, position + 1))          // you can not capture own piece
         isLegal[position + 1] = true;       // x : + 1 , y : 0
-    if ((positionToColumn(position) < 7 && positionToRow(position) < 7) &&       // you have to stay inside board
-        ((positionIncludesWhite(board, position) && !positionIncludesWhite(board, position + 9)) ||                                 // you can not capture own piece
-        (positionIncludesBlack(board, position) && !positionIncludesBlack(board, position + 9))) && positionToRow(position) < 7)    // you can not capture own piece
+    if (positionToColumn(position) < 7 && positionToRow(position) < 7 &&    // you have to stay inside board
+        positionIncludesBothAndNot(board, position, position + 9))          // you can not capture own piece
         isLegal[position + 9] = true;       // x : + 1 , y : + 1
-    if ((positionToRow(position) < 7) &&                           // you have to stay inside board
-        ((positionIncludesWhite(board, position) && !positionIncludesWhite(board, position + 8)) ||                                 // you can not capture own piece
-        (positionIncludesBlack(board, position) && !positionIncludesBlack(board, position + 8))))                                   // you can not capture own piece
+    if (positionToRow(position) < 7 &&                                      // you have to stay inside board
+        positionIncludesBothAndNot(board, position, position + 8))          // you can not capture own piece
         isLegal[position + 8] = true;       // x : 0 , y : + 1
-    if ((positionToColumn(position) > 0 && positionToRow(position) < 7) &&       // you have to stay inside board
-        ((positionIncludesWhite(board, position) && !positionIncludesWhite(board, position + 7)) ||                                 // you can not capture own piece
-        (positionIncludesBlack(board, position) && !positionIncludesBlack(board, position + 7))) && positionToRow(position) < 7)    // you can not capture own piece
+    if (positionToColumn(position) > 0 && positionToRow(position) < 7 &&    // you have to stay inside board
+        positionIncludesBothAndNot(board, position, position + 7))          // you can not capture own piece
         isLegal[position + 7] = true;       // x : - 1 , y : + 1
-    if ((positionToColumn(position) > 0) &&                                       // you have to stay inside board
-        ((positionIncludesWhite(board, position) && !positionIncludesWhite(board, position - 1)) ||                                 // you can not capture own piece
-        (positionIncludesBlack(board, position) && !positionIncludesBlack(board, position - 1))))                                   // you can not capture own piece
+    if (positionToColumn(position) > 0 &&                                   // you have to stay inside board
+        positionIncludesBothAndNot(board, position, position - 1))          // you can not capture own piece
         isLegal[position - 1] = true;       // x : - 1 , y : 0
     if (kingMoved || (aRookMoved && hRookMoved))            // if both rooks or kings moved
         return isLegal;                                     // returns legal moves

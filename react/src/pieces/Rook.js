@@ -1,4 +1,4 @@
-import { positionToRow, positionToColumn, positionIncludesWhite, positionIncludesBlack } from "../FormatTranslator";
+import { positionToRow, positionToColumn, positionIncludesBothAnd, positionIncludesBothAndBothFirst } from "../Functions";
 
 export function getLegalMovesR(position, board) {
     // this array is showing if it is allowed to go there //
@@ -6,36 +6,23 @@ export function getLegalMovesR(position, board) {
 
     // left from rook
     for (let i = 1; i <= positionToColumn(position); i++) {
-        if ((positionIncludesWhite(board, position) && positionIncludesWhite(board, position - i)) ||
-            (positionIncludesBlack(board, position) && positionIncludesBlack(board, position - i))) break;
-        isLegal[position - i] = true;
-        if ((positionIncludesWhite(board, position) && positionIncludesBlack(board, position - i)) ||
-            (positionIncludesBlack(board, position) && positionIncludesWhite(board, position - i))) break;
-
-    }
+        if (positionIncludesBothAnd(board, position, position - i) ||
+            positionIncludesBothAndBothFirst(board, position, position - (i - 1))) break;
+                isLegal[position - i] = true; }
     // right from rook
     for (let i = 1; i < 8 - (positionToColumn(position)); i++) {
-        if ((positionIncludesWhite(board, position) && positionIncludesWhite(board, position + i)) ||
-            (positionIncludesBlack(board, position) && positionIncludesBlack(board, position + i))) break;
-        isLegal[position + i] = true;
-        if ((positionIncludesWhite(board, position) && positionIncludesBlack(board, position + i)) ||
-            (positionIncludesBlack(board, position) && positionIncludesWhite(board, position + i))) break;
-    }
+        if (positionIncludesBothAnd(board, position, position + i) ||
+            positionIncludesBothAndBothFirst(board, position, position + (i - 1))) break;
+                isLegal[position + i] = true; }
     // top from rook
     for (let i = 1; i <= positionToRow(position); i++) {
-        if ((positionIncludesWhite(board, position) && positionIncludesWhite(board, position - 8 * i)) ||
-            (positionIncludesBlack(board, position) && positionIncludesBlack(board, position - 8 * i))) break;
-            isLegal[position - 8 * i] = true;
-        if ((positionIncludesWhite(board, position) && positionIncludesBlack(board, position - 8 * i)) ||
-            (positionIncludesBlack(board, position) && positionIncludesWhite(board, position - 8 * i))) break;
-    }
+        if (positionIncludesBothAnd(board, position, position - 8 * i) ||
+            positionIncludesBothAndBothFirst(board, position, position - 8 * (i - 1))) break;
+                isLegal[position - 8 * i] = true; }
     // bottom from rook
     for (let i = 1; i < 8 - (positionToRow(position)); i++) {
-        if ((positionIncludesWhite(board, position) && positionIncludesWhite(board, position + 8 * i)) ||
-            (positionIncludesBlack(board, position) && positionIncludesBlack(board, position + 8 * i))) break;
-            isLegal[position + 8 * i] = true;
-        if ((positionIncludesWhite(board, position) && positionIncludesBlack(board, position + 8 * i)) ||
-            (positionIncludesBlack(board, position) && positionIncludesWhite(board, position + 8 * i))) break;
-    }
+        if (positionIncludesBothAnd(board, position, position + 8 * i) ||
+            positionIncludesBothAndBothFirst(board, position, position + 8 * (i - 1))) break;
+                isLegal[position + 8 * i] = true; }
     return isLegal;         // return legal moves
 }
