@@ -1,4 +1,4 @@
-import { positionToRow, positionToColumn, positionIncludesWhiteOrEnPassant, positionIncludesBlackOrEnPassant } from "../Functions";
+import { positionToRow, positionToColumn, positionIncludesWhiteOrEnPassant, positionIncludesBlackOrEnPassant } from "../Functions.js";
 
 export function getLegalMovesP(position, board, enPsassantSquare) {
     // this array is showing if it is allowed to go there //

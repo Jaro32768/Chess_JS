@@ -1,4 +1,4 @@
-import { positionToRow, positionToColumn, positionIncludesBothAnd, positionIncludesBothAndBothFirst } from "../Functions";
+import { positionToRow, positionToColumn, positionIncludesBothAnd, positionIncludesBothAndBothFirst } from "../Functions.js";
 
 export function getLegalMovesB(position, board) {
     // this array is showing if it is allowed to go there //

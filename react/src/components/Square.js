@@ -1,5 +1,4 @@
 import React, {useState} from 'react';
-import '../styles/styles.css';                                                   // imports stylesheet
 import BlackBishop from '../images/black-bishop.svg.png';                        // imports image - black bishop
 import BlackKnight from '../images/black-knight.svg.png';                        // imports image - black knight
 import BlackPawn from '../images/black-pawn.svg.png';                            // imports image - black pawn
@@ -13,13 +12,14 @@ import WhiteQueen from '../images/white-queen.svg.png';                         
 import WhiteRook from '../images/white-rook.svg.png';                            // imports image - white rook
 import WhiteKing from '../images/white-king.svg.png';                            // imports image - white bishop
 import Transparent from '../images/transparent.png';                             // imports transparent image
+import { positionToRow, positionToColumn } from '../Functions.js';                  // imports converting functions
 
 export default function Square(props) {
     const [className, setClassName] = useState(null);                           // remembers, which class in styles.css should be used
     let image = null;
 
     if (className === null && props.color)                                      // avoids infinite loop by rerendering component
-        if ((props.row + props.column) % 2 === 0) setClassName('lightSquare')   // if row and column are both even or both odd => square is light
+        if ((positionToRow(props.index) + positionToColumn(props.index)) % 2 === 0) setClassName('lightSquare')   // if row and column are both even or both odd => square is light
         else setClassName('darkSquare')                                         // if row is even and column is odd or row is odd and column is even => square is dark
         
     switch(props.piece) {
@@ -40,7 +40,7 @@ export default function Square(props) {
 
     const handleClick = () => {
         if (props.color === false) props.handlePopUpClick(props.piece);         // if clicked on popup, sends which piece was clicked
-        else props.handleClick(props.row, props.column);                        // passes square's coordinates to Board
+        else props.handleClick(positionToRow(props.index), positionToColumn(props.index));                        // passes square's coordinates to Board
     }
 
     const renderImage = () => {
