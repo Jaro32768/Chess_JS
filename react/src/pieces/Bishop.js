@@ -6,35 +6,35 @@ export function getLegalMovesB(position, board) {
     
     // bottom right from bishop
     for (let i = 1; i < Math.min(8 - (positionToColumn(position)), 8 - positionToRow(position)); i++) {
-        if ((board[position][0].includes('white') && board[position + i + 8 * i][0]?.includes('white')) ||
-            (board[position][0].includes('black') && board[position + i + 8 * i][0]?.includes('black'))) break;
-        isLegal[position + i + 8 * i] = true;
-        if ((board[position][0].includes('white') && board[position + i + 8 * i][0]?.includes('black')) ||
-            (board[position][0].includes('black') && board[position + i + 8 * i][0]?.includes('white'))) break;
+        if ((positionIncludesWhite(board, position) && positionIncludesWhite(board, position + 9 * i)) ||
+            (positionIncludesBlack(board, position) && positionIncludesBlack(board, position + 9 * i))) break;
+        isLegal[position + 9 * i] = true;
+        if ((positionIncludesWhite(board, position) && positionIncludesBlack(board, position + 9 * i)) ||
+            (positionIncludesBlack(board, position) && positionIncludesWhite(board, position + 9 * i))) break;
     }
     // top right from bishop
     for (let i = 1; i < Math.min(8 - (positionToColumn(position)), 1 + positionToRow(position)); i++) {
-        if ((board[position][0].includes('white') && board[position + i - 8 * i][0]?.includes('white')) ||
-            (board[position][0].includes('black') && board[position + i - 8 * i][0]?.includes('black'))) break;
-            isLegal[position + i - 8 * i] = true;
-        if ((board[position][0].includes('white') && board[position + i - 8 * i][0]?.includes('black')) ||
-            (board[position][0].includes('black') && board[position + i - 8 * i][0]?.includes('white'))) break;
+        if ((positionIncludesWhite(board, position) && positionIncludesWhite(board, position - 7 * i)) ||
+            (positionIncludesBlack(board, position) && positionIncludesBlack(board, position - 7 * i))) break;
+            isLegal[position - 7 * i] = true;
+        if ((positionIncludesWhite(board, position) && positionIncludesBlack(board, position - 7 * i)) ||
+            (positionIncludesBlack(board, position) && positionIncludesWhite(board, position - 7 * i))) break;
     }  
     // top left from bishop
     for (let i = 1; i < Math.min(1 + (positionToColumn(position)), 1 + positionToRow(position)); i++) {
-        if ((board[position][0].includes('white') && board[position - i - 8 * i][0]?.includes('white')) ||
-            (board[position][0].includes('black') && board[position - i - 8 * i][0]?.includes('black'))) break;
-            isLegal[position - i - 8 * i] = true;
-        if ((board[position][0].includes('white') && board[position - i - 8 * i][0]?.includes('black')) ||
-            (board[position][0].includes('black') && board[position - i - 8 * i][0]?.includes('white'))) break;
+        if ((positionIncludesWhite(board, position) && positionIncludesWhite(board, position - 9 * i)) ||
+            (positionIncludesBlack(board, position) && positionIncludesBlack(board, position - 9 * i))) break;
+            isLegal[position - 9 * i] = true;
+        if ((positionIncludesWhite(board, position) && positionIncludesBlack(board, position - 9 * i)) ||
+            (positionIncludesBlack(board, position) && positionIncludesWhite(board, position - 9 * i))) break;
     }
     // bottom left from bishop 
     for (let i = 1; i < Math.min(1 + (positionToColumn(position)), 8 - positionToRow(position)); i++) {
-        if ((board[position][0].includes('white') && board[position - i + 8 * i][0]?.includes('white')) ||
-            (board[position][0].includes('black') && board[position - i + 8 * i][0]?.includes('black'))) break;
-            isLegal[position - i + 8 * i] = true;
-        if ((board[position][0].includes('white') && board[position - i + 8 * i][0]?.includes('black')) ||
-            (board[position][0].includes('black') && board[position - i + 8 * i][0]?.includes('white'))) break;
+        if ((positionIncludesWhite(board, position) && positionIncludesWhite(board, position + 7 * i)) ||
+            (positionIncludesBlack(board, position) && positionIncludesBlack(board, position + 7 * i))) break;
+            isLegal[position + 7 * i] = true;
+        if ((positionIncludesWhite(board, position) && positionIncludesBlack(board, position + 7 * i)) ||
+            (positionIncludesBlack(board, position) && positionIncludesWhite(board, position + 7 * i))) break;
     }
     return isLegal          // return legal moves
 }

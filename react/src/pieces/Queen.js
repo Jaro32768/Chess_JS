@@ -1,4 +1,3 @@
-import { positionToRow, positionToColumn, positionIncludesWhite, positionIncludesBlack } from "../FormatTranslator";
 import { getLegalMovesB } from './Bishop.js';     // imports Bishop movement
 import { getLegalMovesR } from './Rook.js';       // imports Rook movement
 
