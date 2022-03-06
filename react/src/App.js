@@ -6,6 +6,7 @@ function App() {
   const [promotedTo, setPromotedTo] = useState(null);   // stores which piece pawn is being promoted to
   const [isWhite, setIsWhite] = useState(null);         // stores color of promoted piece
   const [sender, setSender] = useState(null);           // stores sender of promotion request
+  const [isWhitesPOV, setIsWhitesPOV] = useState(true); // stores player whose POV board should be rendered from 
 
   /* sets which piece pawn is being promoted to */
   const handlePopUpClick = (clicked) => {
@@ -24,7 +25,8 @@ function App() {
   return (
     <div className='App'>
         <div className='board'>
-          <Board promotedTo={promotedTo}
+          <Board isWhitesPOV={isWhitesPOV}
+                 promotedTo={promotedTo}
                  sender={sender}
                  showPromotionPopUp={showPromotionPopUp}
                  received={received}/>        {/* passes variables and methods to board */}

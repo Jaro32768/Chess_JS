@@ -12,7 +12,8 @@ let highlightedSquare = null,                           // remembers which squar
     whiteKingMoved = false, blackKingMoved = false,     // remembers if kings moved
     whiteARookMoved = false, blackARookMoved = false,   // remembers if a rooks moved
     whiteHRookMoved = false, blackHRookMoved = false,   // remembers if h rooks moved
-    isWhitesMove = true;                                // remembers who's move it is
+    isWhitesMove = true,                                // remembers whose move it is
+    startIndex, endIndex;                               // remembers start and end index for rendering squares
 
 const pieces = [                        // content of each position on board - [ pieceOnSquare , isPossibleToMoveThere ]
     // 8TH RANK //
@@ -99,7 +100,8 @@ const pieces = [                        // content of each position on board - [
 export default function Board(props) {
     const [selectedRow, setSelectedRow] = useState(null);           // stores row of previously clicked square
     const [selectedColumn, setSelectedColumn] = useState(null);     // stores column of previously clicked square
-
+    startIndex = props.isWhitesPOV ? 0 : 7;                         // sets start index based on which POV it should show
+    endIndex = props.isWhitesPOV ? 8 : -1;                          // sets end index based on which POV it should show
 
     // sets legal moves //
     const setLegalMoves = (selectedSquare) => {
@@ -228,9 +230,9 @@ export default function Board(props) {
 
     // renders entire board //
     const render = () => {
-        const rows = [];                                                // contains all rows
-        for (let i = 0; i < 8; i++) {                                   // 8 rows - for each of them
-            rows.push(renderRow(i*8));                                  // renders row and adds it it array
+        const rows = [];                                                                                            // contains all rows
+        for (let i = startIndex; props.isWhitesPOV ? i < endIndex : i > endIndex; props.isWhitesPOV ? i++ : i--) {  // 8 rows - for each of them
+            rows.push(renderRow(i*8));                                                                              // renders row and adds it to array
         }
         return <>{rows}</>;             // returns entire board
     }
