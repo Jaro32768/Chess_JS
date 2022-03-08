@@ -15,7 +15,7 @@ let highlightedSquare = null,                           // remembers which squar
     isWhitesMove = true,                                // remembers whose move it is
     startIndex, endIndex,                               // remembers start and end index for rendering squares
     halfmoveClock = 0,                                  // counting for 50 move == draw rule
-    fullmoveCounter = 1;                                // remmebers how many moves were played
+    fullmoveCounter = 1;                                // remembers how many moves were played
 
 const pieces = new Array(64).fill().map(() => []);      // creates array that stores which pieces are on a board and if any square should be highlighed
 pieces.forEach(array => { array.push(null, false); });  // fills array with init data
