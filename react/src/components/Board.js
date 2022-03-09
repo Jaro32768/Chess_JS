@@ -108,7 +108,6 @@ export default function Board(props) {
                 if (getLegalMoves(i, board)[kingsPosition]) return false;
             }
         }
-        console.log("true")
         return true;
     }
 
