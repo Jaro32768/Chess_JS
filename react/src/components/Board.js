@@ -113,6 +113,9 @@ export default function Board(props) {
 
     const doesNotKeepCheck = (selectedSquare, move) => {
         let futureBoard = pieces.map(function(arr) { return arr.slice(); });
+        if (futureBoard[selectedSquare][0]?.includes('pawn') && futureBoard[move][0] === 'en-passant-square')
+            if (positionToRow(selectedSquare) === 3) futureBoard[move + 8][0] = null;
+            else futureBoard[move - 8][0] = null;
         futureBoard[move][0] = futureBoard[selectedSquare][0];
         futureBoard[selectedSquare][0] = null;
         return (isLegalBoard(futureBoard, isWhitesMove));
