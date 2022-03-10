@@ -248,6 +248,7 @@ export default function Board(props) {
                 if (!isLegalBoard(pieces, isWhitesMove)) console.log('checkmate! ' + (isWhitesMove ? 'black' : 'white') + ' won!');         // if is in check, prints 'checkmate!' into console
                 else console.log('stalemate! draw!');                                                                                       // if is not in check, prints 'stalemate!' into console
             }
+            if(halfmoveClock === 100) console.log('50 moves rule! draw!');                                                                  // if 100 halfmoves pass, it is draw by 50 moves rule
         }
     }
 
