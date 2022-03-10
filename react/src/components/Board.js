@@ -96,47 +96,49 @@ export default function Board(props) {
         return fen;                                             // returns FEN
     }
 
+    // returns if the board is legal //
     const isLegalBoard = (board, isWhiteMoving) => {
-        let includes = isWhiteMoving ? 'black' : 'white',
-            kingsPosition;
-        for (let i = 0; i < 64; i++) {
-            if (board[i][0] === (isWhiteMoving ? 'white-king' : 'black-king'))
-                kingsPosition = i;
+        let includes = isWhiteMoving ? 'black' : 'white',                       // who is being searched
+            kingsPosition;                                                      // where is king located
+        for (let i = 0; i < 64; i++) {                                          // for each square on the board
+            if (board[i][0] === (isWhiteMoving ? 'white-king' : 'black-king'))  // if king of player who has move is found
+                kingsPosition = i;                                              // kings position is remembered
         }
-        for (let i = 0; i < 64; i++) {
-            if(board[i][0]?.includes(includes)) {
-                if (getLegalMoves(i, board)[kingsPosition]) return false;
+        for (let i = 0; i < 64; i++) {                                          // for each square on the board
+            if(board[i][0]?.includes(includes)) {                               // searches for enemy pieces
+                if (getLegalMoves(i, board)[kingsPosition]) return false;       // if enemy pieces are attacking king returns false
             }
         }
-        return true;
+        return true;                                                            // else returns true
     }
 
+    // returns if specific move does not keep own king in check //
     const doesNotKeepCheck = (selectedSquare, move) => {
-        let futureBoard = pieces.map(function(arr) { return arr.slice(); });
-        if (futureBoard[selectedSquare][0]?.includes('pawn') && futureBoard[move][0] === 'en-passant-square')
-            if (positionToRow(selectedSquare) === 3) futureBoard[move + 8][0] = null;
-            else futureBoard[move - 8][0] = null;
-        futureBoard[move][0] = futureBoard[selectedSquare][0];
-        futureBoard[selectedSquare][0] = null;
-        if(futureBoard[move][0]?.includes('king')) {
-            if (selectedSquare - move === 2) {
-                for (let i = 1; i < 3; i++) {
-                    if (!isLegalBoard(futureBoard, isWhitesMove)) return false;
-                    futureBoard[move + i][0] = futureBoard[move + i - 1][0]
-                    futureBoard[move + i - 1][0] = null;
+        let futureBoard = pieces.map(function(arr) { return arr.slice(); });                                    // make clone of board array
+        if (futureBoard[selectedSquare][0]?.includes('pawn') && futureBoard[move][0] === 'en-passant-square')   // if move is en passant
+            if (positionToRow(selectedSquare) === 3) futureBoard[move + 8][0] = null;                           // if white is trying to enpassant
+            else futureBoard[move - 8][0] = null;                                                               // if black is trying to en passant
+        futureBoard[move][0] = futureBoard[selectedSquare][0];                                                  // copies piece to new square
+        futureBoard[selectedSquare][0] = null;                                                                  // removes piece from old square
+        if(futureBoard[move][0]?.includes('king')) {                                                            // if king is being moved
+            if (selectedSquare - move === 2) {                                                                  // queenside castle
+                for (let i = 1; i < 3; i++) {                                                                   // for all squares that can not be in check while castling
+                    if (!isLegalBoard(futureBoard, isWhitesMove)) return false;                                 // if any of them is in check returns false
+                    futureBoard[move + i][0] = futureBoard[move + i - 1][0]                                     // copies king to another square to check for check
+                    futureBoard[move + i - 1][0] = null;                                                        // removes king from old square
                 }
-                return true
+                return true                                                                                     // if none of them is in check, returns true
             }
-            else if (selectedSquare - move === -2) {
-                for (let i = 1; i < 3; i++) {
-                    if (!isLegalBoard(futureBoard, isWhitesMove)) return false;
-                    futureBoard[move - i][0] = futureBoard[move - i + 1][0]
-                    futureBoard[move - i + 1][0] = null;
+            else if (selectedSquare - move === -2) {                                                            // kingside castle
+                for (let i = 1; i < 3; i++) {                                                                   // for all squares that can not be in check while castling
+                    if (!isLegalBoard(futureBoard, isWhitesMove)) return false;                                 // if any of them is in check returns false
+                    futureBoard[move - i][0] = futureBoard[move - i + 1][0]                                     // copies king to another square to check for check
+                    futureBoard[move - i + 1][0] = null;                                                        // removes king from old square
                 }
-                return true
+                return true                                                                                     // if none of them is in check, returns true
             }
         }
-        return isLegalBoard(futureBoard, isWhitesMove);
+        return isLegalBoard(futureBoard, isWhitesMove);                                                         // returns if king of player who is trying to make move keeps safe after move
     }
 
     // sets legal moves //
