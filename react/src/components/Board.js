@@ -118,7 +118,25 @@ export default function Board(props) {
             else futureBoard[move - 8][0] = null;
         futureBoard[move][0] = futureBoard[selectedSquare][0];
         futureBoard[selectedSquare][0] = null;
-        return (isLegalBoard(futureBoard, isWhitesMove));
+        if(futureBoard[move][0]?.includes('king')) {
+            if (selectedSquare - move === 2) {
+                for (let i = 1; i < 3; i++) {
+                    if (!isLegalBoard(futureBoard, isWhitesMove)) return false;
+                    futureBoard[move + i][0] = futureBoard[move + i - 1][0]
+                    futureBoard[move + i - 1][0] = null;
+                }
+                return true
+            }
+            else if (selectedSquare - move === -2) {
+                for (let i = 1; i < 3; i++) {
+                    if (!isLegalBoard(futureBoard, isWhitesMove)) return false;
+                    futureBoard[move - i][0] = futureBoard[move - i + 1][0]
+                    futureBoard[move - i + 1][0] = null;
+                }
+                return true
+            }
+        }
+        return isLegalBoard(futureBoard, isWhitesMove);
     }
 
     // sets legal moves //
