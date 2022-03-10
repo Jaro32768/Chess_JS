@@ -96,6 +96,22 @@ export default function Board(props) {
         return fen;                                             // returns FEN
     }
 
+    // if there are 0 legal moves, returns true, else returns false //
+    const hasZeroLegalMoves = (board, isWhiteMoving) => {
+        let moving = isWhiteMoving ? 'white' : 'black',             // remembers whose move it is
+            legalMoves;                                             // remembers legal moves
+        for (let i = 0; i < 64; i++) {                              // for each square on board
+            if (board[i][0]?.includes(moving)) {                    // if it contains friendly piece
+                legalMoves = getLegalMoves(i, board);               // searches for its legal moves
+                for (let j = 0; j < 64; j++) {                      // for each square on board
+                    if (legalMoves[j] && doesNotKeepCheck(i, j))    // if it is legal move
+                        return false;                               // returns false
+                }
+            }
+        }
+        return true;                                                // else returns true
+    }
+
     // returns if the board is legal //
     const isLegalBoard = (board, isWhiteMoving) => {
         let includes = isWhiteMoving ? 'black' : 'white',                       // who is being searched
@@ -228,6 +244,10 @@ export default function Board(props) {
                 props.showPromotionPopUp(true, rowAndColumnToPosition(senderRow , senderColumn));                                           // show promotion popup for white
             else if (pieces[rowAndColumnToPosition(senderRow , senderColumn)][0] === 'black-pawn' && senderRow === 7)                       // if black pawn reaches last rank
                 props.showPromotionPopUp(false, rowAndColumnToPosition(senderRow , senderColumn));                                          // show promotion popup for black
+            if (hasZeroLegalMoves(pieces, isWhitesMove)) {                                                                                  // if has zero legal moves
+                if (!isLegalBoard(pieces, isWhitesMove)) console.log('checkmate! ' + (isWhitesMove ? 'black' : 'white') + ' won!');         // if is in check, prints 'checkmate!' into console
+                else console.log('stalemate! draw!');                                                                                       // if is not in check, prints 'stalemate!' into console
+            }
         }
     }
 
