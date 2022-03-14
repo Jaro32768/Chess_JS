@@ -1,7 +1,22 @@
+*{
+    margin: 0;
+    padding: 0;
+}
+
+:root {
+    --squareSize: 11vw;
+}
+@media (orientation:landscape) {
+    :root {
+        --squareSize: 11vh;
+    }
+}
+
 .board{
-    position:absolute;
-    top: 3vw;
-    left: 30vw
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
 }
 .boardRow{
     display:flex;
@@ -10,8 +25,8 @@
 .darkSquare,
 .imgPiece,
 .promotionPopUpImg{
-    height: 5vw;
-    width: 5vw;
+    height: var(--squareSize);
+    width: var(--squareSize);
 }
 .lightSquare{
     background-color: rgb(228, 210, 131);
