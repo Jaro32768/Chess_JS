@@ -267,6 +267,10 @@ export default function Board(props) {
 
     if (props.promotedTo !== null) {                    // if receives piece pawn is promoted to
         pieces[props.sender][0] = props.promotedTo;     // places this piece on the board
+        if (hasZeroLegalMoves(pieces, isWhitesMove)) {                                                                                  // if has zero legal moves
+            if (!isLegalBoard(pieces, isWhitesMove)) console.log('checkmate! ' + (isWhitesMove ? 'black' : 'white') + ' won!');         // if is in check, prints 'checkmate!' into console
+            else console.log('stalemate! draw!');                                                                                       // if is not in check, prints 'stalemate!' into console
+        }
         props.received();                               // sends back message that it was successfull
     }
     if (JSON.stringify(pieces) === JSON.stringify(new Array(64).fill([ null, false ]))) importFEN('rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1');  // on init imports starting position
