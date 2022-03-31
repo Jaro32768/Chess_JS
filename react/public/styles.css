@@ -2,13 +2,20 @@
     margin: 0;
     padding: 0;
 }
+html{    
+    background-color: #210070;
+}
 
 :root {
-    --squareSize: 11vw;
+    --squareSize: 9vw;
+    --navbarItemSizeX: 10vw;
+    --navbarItemSizeY: 8.5vw;
 }
 @media (orientation:landscape) {
     :root {
-        --squareSize: 11vh;
+        --squareSize: 9vh;
+        --navbarItemSizeX: 10vh;
+        --navbarItemSizeY: 8.5vh;
     }
 }
 
@@ -52,4 +59,29 @@
 .promotionPopUpImg{
     background-color: rgb(83, 83, 83);
     border-radius: 100px;
+}
+
+.navbar{
+    margin: 0;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: var(--navbarItemSizeY);
+    text-align: center;
+}
+
+.navbarItem{
+    height: var(--navbarItemSizeX);
+    width: var(--navbarItemSizeY);
+    background-color: #79D9C5;
+    margin-top: 0.25vh;
+    margin-bottom: 0.25vh;
+    border: solid rgb(0, 0, 0) 0.04em;
+}
+
+.logo{
+    height: calc(var(--navbarItemSizeX) * 1.2);
+    width: calc(var(--navbarItemSizeX) * 1.2);
+    border: solid rgb(0, 0, 0) 0.1em;
+    margin: 1vw;
 }

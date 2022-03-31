@@ -1,6 +1,8 @@
 import { useState } from 'react';
 import Board from './components/Board.js';                    // imports Board component
 import PromotionPopUp from './components/PromotionPopUp.js';  // imports PromotionPopUp component
+import Navbar from './components/Navbar/Navbar.js';
+import Logo from './components/Logo.js';
 
 function App() {
   const [promotedTo, setPromotedTo] = useState(null);   // stores which piece pawn is being promoted to
@@ -24,6 +26,8 @@ function App() {
 
   return (
     <div className='App'>
+      <Logo/>
+      <Navbar/>
         <div className='board'>
           <Board isWhitesPOV={isWhitesPOV}
                  promotedTo={promotedTo}
