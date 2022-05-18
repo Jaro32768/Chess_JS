@@ -66,7 +66,7 @@ html{
     position: absolute;
     top: 50%;
     transform: translateY(-50%);
-    font-size: var(--navbarItemSizeY);
+    font-size: calc(var(--navbarItemSizeY) - 250%);
     text-align: center;
 }
 
