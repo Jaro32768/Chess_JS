@@ -1,18 +1,10 @@
 import React from 'react';
 import Item from './Item';
 
-export default function Navbar(props) {
-  const items = [
-    'FEN',
-    '?',
-    '?',
-    '?',
-    '?',
-  ];
-
+export default function Navbar() {
   return (
     <div className='navbar'>
-      {Array.from({ length: items.length }, (_, index) => <Item key={index} type={items[index]} getFEN={props.getFEN} />)}
+        {Array.from({length: 5}, (_, index) => <Item key={index} />)}
     </div>
   )
 }

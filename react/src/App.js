@@ -9,7 +9,6 @@ function App() {
   const [isWhite, setIsWhite] = useState(null);         // stores color of promoted piece
   const [sender, setSender] = useState(null);           // stores sender of promotion request
   const [isWhitesPOV, setIsWhitesPOV] = useState(true); // stores player whose POV board should be rendered from 
-  const [fen, setFen] = useState('rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1');
 
   /* sets which piece pawn is being promoted to */
   const handlePopUpClick = (clicked) => {
@@ -27,19 +26,17 @@ function App() {
 
   return (
     <div className='App'>
-      <Logo />
-      <Navbar fen={fen} />
-      <div className='board'>
-        <Board isWhitesPOV={isWhitesPOV}
-          promotedTo={promotedTo}
-          sender={sender}
-          showPromotionPopUp={showPromotionPopUp}
-          received={received}
-          fen={fen}
-          setFen={setFen} />        {/* passes variables and methods to board */}
-      </div>                  {/* renders board */}
-      {sender === null ? <></> : <PromotionPopUp isWhite={isWhite} handlePopUpClick={handlePopUpClick} />}
-      {/* if there is any sender renders promotion popup, else empty element is returned - nothing is rendered */}
+      <Logo/>
+      <Navbar/>
+        <div className='board'>
+          <Board isWhitesPOV={isWhitesPOV}
+                 promotedTo={promotedTo}
+                 sender={sender}
+                 showPromotionPopUp={showPromotionPopUp}
+                 received={received}/>        {/* passes variables and methods to board */}
+        </div>                  {/* renders board */}
+        {sender === null ? <></> : <PromotionPopUp isWhite={isWhite} handlePopUpClick={handlePopUpClick}/>}
+        {/* if there is any sender renders promotion popup, else empty element is returned - nothing is rendered */}
     </div>
   );
 }
