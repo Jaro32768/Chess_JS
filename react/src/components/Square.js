@@ -12,7 +12,7 @@ import WhiteQueen from '../images/white-queen.svg.png';                         
 import WhiteRook from '../images/white-rook.svg.png';                            // imports image - white rook
 import WhiteKing from '../images/white-king.svg.png';                            // imports image - white bishop
 import Transparent from '../images/transparent.png';                             // imports transparent image
-import { positionToRow, positionToColumn } from '../Functions.js';                  // imports converting functions
+import { positionToRow, positionToColumn } from '../Functions.js';               // imports converting functions
 
 export default function Square(props) {
     const [className, setClassName] = useState(null);                           // remembers, which class in styles.css should be used

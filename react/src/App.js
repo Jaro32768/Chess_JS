@@ -28,7 +28,7 @@ function App() {
   return (
     <div className='App'>
       <Logo />
-      <Navbar fen={fen} />
+      <Navbar fen={fen} setFen={setFen} />
       <div className='board'>
         <Board isWhitesPOV={isWhitesPOV}
           promotedTo={promotedTo}

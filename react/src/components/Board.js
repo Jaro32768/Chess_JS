@@ -27,8 +27,6 @@ export default function Board(props) {
     startIndex = props.isWhitesPOV ? 0 : 7;                         // sets start index based on which POV it should show
     endIndex = props.isWhitesPOV ? 8 : -1;                          // sets end index based on which POV it should show
 
-    if (props.fen !== FEN) importFEN(props.fen)
-
     // inports FEN //
     const importFEN = (fen) => {
         FEN = props.fen;
@@ -58,6 +56,7 @@ export default function Board(props) {
 
     // exports FEN //
     const exportFEN = () => {
+        FEN = "";
         for (let i = 0; i < 64; i++) {                  // for each square
             if (pieces[i][0] === 'en-passant-square') FEN += pieceWordToLetter(null) + FEN.substr(i + 1);
             else FEN += pieceWordToLetter(pieces[i][0]) + FEN.substr(i + 1);        // convert format from pieces to fen
@@ -99,6 +98,7 @@ export default function Board(props) {
         props.setFen(FEN);                                      // sets FEN to props
         return FEN;                                             // returns FEN
     }
+    if (props.fen !== FEN) importFEN(props.fen)
 
     // if there are 0 legal moves, returns true, else returns false //
     const hasZeroLegalMoves = (board, isWhiteMoving) => {
@@ -253,6 +253,7 @@ export default function Board(props) {
                 else alert('stalemate! draw!');                                                                                             // if is not in check, prints 'stalemate!' into console
             }
             if (halfmoveClock === 100) alert('50 moves rule! draw!');                                                                       // if 100 halfmoves pass, it is draw by 50 moves rule
+            exportFEN();
         }
     }
 
