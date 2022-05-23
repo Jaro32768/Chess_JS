@@ -2,7 +2,6 @@ import { useState } from 'react';
 import Board from './components/Board.js';                    // imports Board component
 import PromotionPopUp from './components/PromotionPopUp.js';  // imports PromotionPopUp component
 import Navbar from './components/Navbar/Navbar.js';
-import Logo from './components/Logo.js';
 
 function App() {
   const [promotedTo, setPromotedTo] = useState(null);   // stores which piece pawn is being promoted to
@@ -27,17 +26,20 @@ function App() {
 
   return (
     <div className='App'>
-      <Logo />
       <Navbar fen={fen} setFen={setFen} />
-      <div className='board'>
-        <Board isWhitesPOV={isWhitesPOV}
-          promotedTo={promotedTo}
-          sender={sender}
-          showPromotionPopUp={showPromotionPopUp}
-          received={received}
-          fen={fen}
-          setFen={setFen} />        {/* passes variables and methods to board */}
-      </div>                  {/* renders board */}
+      <div className='board-container-container'>
+        <div className='board-container'>
+          <div className='board'>
+            <Board isWhitesPOV={isWhitesPOV}
+              promotedTo={promotedTo}
+              sender={sender}
+              showPromotionPopUp={showPromotionPopUp}
+              received={received}
+              fen={fen}
+              setFen={setFen} />        {/* passes variables and methods to board */}
+          </div>                  {/* renders board */}
+        </div>
+      </div>
       {sender === null ? <></> : <PromotionPopUp isWhite={isWhite} handlePopUpClick={handlePopUpClick} />}
       {/* if there is any sender renders promotion popup, else empty element is returned - nothing is rendered */}
     </div>

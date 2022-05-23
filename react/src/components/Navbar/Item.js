@@ -21,7 +21,7 @@ export default function Item(props) {
   }
 
   return (
-    <div className='navbarItem' onClick={handleClick}>
+    <div className='navbar-item' onClick={handleClick}>
       {props.type}
     </div>
   )
