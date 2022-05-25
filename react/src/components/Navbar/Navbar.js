@@ -5,10 +5,10 @@ import Logo from '../Logo';
 export default function Navbar(props) {
   const items = [
     'FEN',
-    '?',
-    '?',
-    '?',
-    '?',
+    'lorem ipsum',
+    'lorem ipsum',
+    'lorem ipsum',
+    'lorem ipsum',
   ];
 
   const handleMenuClick = () => {
@@ -25,7 +25,7 @@ export default function Navbar(props) {
         </div>
       </div>
       <div className='navbar-items hidden'>
-        {Array.from({ length: items.length }, (_, index) => <Item key={index} type={items[index]} fen={props.fen} setFen={props.setFen} />)}
+        {Array.from({ length: items.length }, (_, index) => <><Item key={index} type={items[index]} fen={props.fen} setFen={props.setFen} /><div className='spacer'></div></>)}
       </div>
       <div className='container' onClick={handleMenuClick}>
         <div className='bar1'></div>

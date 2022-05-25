@@ -2,25 +2,24 @@
     margin: 0;
     padding: 0;
 }
+html, body{
+    max-width: 100%;
+    overflow-x: hidden;
+}
 html{    
     background-color: #2B2B2B;
-    overflow: hidden;
 }
 :root {
     --squareSize: 8.5vw;
-    --navbarItemSizeX: 10vw;
-    --navbarItemSizeY: 8.5vw;
 }
 @media (orientation:landscape) {
     :root {
         --squareSize: 8.5vh;
-        --navbarItemSizeX: 10vh;
-        --navbarItemSizeY: 8.5vh;
     }
 }
 p, h1{
     color: white;
-    font-size: calc(var(--navbarItemSizeY) - 250%);
+    font-size: 30px;
 }
 .board-container {
     background-color: #1A1A1A;
@@ -76,18 +75,18 @@ p, h1{
     justify-content: space-between;
     align-items: center;
     height: 150px;
-    width: 99vw;
+    width: 100vw;
     background-color: black;
     padding: 0 .5vw;
 }
 .navbar-items{
     margin: 0;
-    font-size: calc(var(--navbarItemSizeY) - 250%);
+    font-size: 30px;
     text-align: center;
     display: flex;
     flex-direction: row;
-    justify-content: center;
-    align-items: center;
+    justify-content: space-between;
+    align-items: space-between;
 }
 .hidden{
     visibility: hidden;
@@ -110,14 +109,14 @@ p, h1{
     justify-content: center;
 }
 .logo{
-    height: calc(var(--navbarItemSizeX) * 1.2);
-    width: calc(var(--navbarItemSizeX) * 1.2);
+    height: 130px;
     border: solid rgb(0, 0, 0) 0.1em;
     margin: 1vw;
 }
 .container {
     display: inline-block;
     cursor: pointer;
+    padding-right: 15px;
 }  
 .bar1, .bar2, .bar3 {
 width: 35px;
@@ -136,4 +135,7 @@ transform: rotate(-45deg) translate(-9px, 6px);
 .change .bar3 {
 -webkit-transform: rotate(45deg) translate(-8px, -8px);
 transform: rotate(45deg) translate(-8px, -8px);
+}
+.spacer {
+    width: 30px;
 }
