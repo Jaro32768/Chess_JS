@@ -1,4 +1,4 @@
-package com.projectors.user;
+package com.projectors.game;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -12,31 +12,29 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 @Controller
 @RestController 
-    @RequestMapping(path = "api/v1/user")
+    @RequestMapping(path = "api/v1/game")
 
-public class UserController 
-{
-    private final UserService userService;
+public class GameController {
+    
+    private final GameService gameService;
 
     @Autowired
-    public UserController(UserService userService){
-        this.userService = userService;
+    public GameController(GameService gameService){
+        this.gameService = gameService;
     }
 
     @GetMapping
-    public List<User> getUsers(){
-        return userService.getUsers();
+    public List<Game> getGames(){
+        return gameService.getGames();
     }
 
     @PostMapping
-    public void registerNewUser(@RequestBody User user){
-        userService.addNewUser(user);
+    public void registerNewGame(@RequestBody Game game){
+        gameService.addNewGame(game);
     }
 
-    @DeleteMapping(path = "{userId}")
-    public void deleteUser(@PathVariable("userId") Long userId){
-        userService.deleteUser(userId);
+    @DeleteMapping(path = "{gameId}")
+    public void deleteGame(@PathVariable("gameId") Long gameId){
+        gameService.deleteGame(gameId);
     }
-
-    
 }

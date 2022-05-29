@@ -1,4 +1,5 @@
 package com.projectors.user;
+
  
 import javax.persistence.*;
 
@@ -15,16 +16,13 @@ public class User {
      
     @Column(nullable = false, length = 64)
     private String password;
-
+  
     public User(Long id, String login, String password)
     {
         this.id=id;
         this.login=login;
         this.password=password;
     }
-
-    
-     
 
     public Long getId() {
         return this.id;
