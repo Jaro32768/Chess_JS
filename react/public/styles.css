@@ -45,16 +45,18 @@ p, h1{
     width: var(--squareSize);
 }
 .lightSquare{
-    background-color: #F9003A;
+    background: rgb(249,0,58);
+    background: radial-gradient(circle, rgba(249,0,58,1) 0%, rgba(34,34,34,1) 100%);
 }
 .darkSquare{
-    background-color: #222222;
+    background: rgb(34,34,34);
+background: radial-gradient(circle, rgba(34,34,34,1) 0%, rgba(51,51,51,1) 100%);
 }
 .selectedSquare{
-    background-color:  rgba(93, 0, 155, 0.377);
+    background-color:  rgba(93, 0, 155, 0.3);
 }
 .possibleMove{
-    background-color: rgba(106, 255, 0, 0.392);
+    background-color: rgba(54, 23, 95, 0.6);
 }
 .promotionPopUp{
     position: absolute; 
@@ -76,7 +78,8 @@ p, h1{
     align-items: center;
     height: 150px;
     width: 100vw;
-    background-color: black;
+    background: rgb(0,0,0);
+    background: linear-gradient(135deg, rgba(0,0,0,1) 0%, rgba(70,70,70,1) 100%);
     padding: 0 .5vw;
 }
 .navbar-items{
@@ -117,11 +120,12 @@ p, h1{
     display: inline-block;
     cursor: pointer;
     padding-right: 15px;
+    transform: translateX(-3vw);
 }  
 .bar1, .bar2, .bar3 {
 width: 35px;
 height: 5px;
-background-color: #333;
+background-color: black;
 margin: 6px 0;
 transition: 0.4s;
 }  
@@ -138,4 +142,30 @@ transform: rotate(45deg) translate(-8px, -8px);
 }
 .spacer {
     width: 30px;
+}
+
+@media screen and (max-width: 950px) {
+    h1, p, .bar1, .bar2, .bar3{
+        display:none
+    }
+    .hidden {
+        visibility: visible;
+    }
+    .navbar-item {
+        font-size : .8em;
+    }
+}
+
+@media screen and (max-width: 600px) {
+    .logo {
+        display: none;
+    }
+    .navbar-items {
+        align-content: space-around;
+    }
+}
+@media screen and (max-width: 450px) {
+    .navbar-item {
+        font-size : .6em;
+    }
 }

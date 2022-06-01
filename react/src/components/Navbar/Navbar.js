@@ -25,6 +25,7 @@ export default function Navbar(props) {
         </div>
       </div>
       <div className='navbar-items hidden'>
+        <div className='spacer'></div>
         {Array.from({ length: items.length }, (_, index) => <><Item key={index} type={items[index]} fen={props.fen} setFen={props.setFen} /><div className='spacer'></div></>)}
       </div>
       <div className='container' onClick={handleMenuClick}>
