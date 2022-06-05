@@ -115,6 +115,7 @@ background: radial-gradient(circle, rgba(34,34,34,1) 0%, rgba(51,51,51,1) 100%);
     height: 130px;
     border: solid rgb(0, 0, 0) 0.1em;
     margin: 1vw;
+    cursor: pointer;
 }
 .container {
     display: inline-block;
@@ -142,6 +143,29 @@ transform: rotate(45deg) translate(-8px, -8px);
 }
 .spacer {
     width: 30px;
+}
+.button {
+    background: rgb(249,0,58);
+    background: radial-gradient(circle, rgba(249,0,58,1) 0%, rgba(34,34,34,1) 100%);
+    border: none;
+    color: white;
+    padding: 15px 256px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 40px;
+    margin: 16px 2px;
+    cursor: pointer;
+    border-radius: 5px;
+}
+.home-page {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    width: 100vw;
+    
 }
 
 @media screen and (max-width: 950px) {
