@@ -11,7 +11,7 @@ function App() {
       <Router>
         <Routes>
           <Route path="/" element={<HomePage />} />
-          <Route path="/game" element={<GamePage />} />
+          <Route path="/game/:fen" element={<GamePage />} />
         </Routes>
       </Router>
     </div>

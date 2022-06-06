@@ -1,5 +1,5 @@
-import React from 'react';
-import { useState } from 'react';
+import React, { useState } from 'react';
+import { useParams } from 'react-router-dom';
 import Board from './components/Board.js';                    // imports Board component
 import PromotionPopUp from './components/PromotionPopUp.js';  // imports PromotionPopUp component
 import Navbar from './components/Navbar/Navbar.js';
@@ -9,7 +9,9 @@ export default function GamePage(props) {
     const [isWhite, setIsWhite] = useState(null);         // stores color of promoted piece
     const [sender, setSender] = useState(null);           // stores sender of promotion request
     const [isWhitesPOV, setIsWhitesPOV] = useState(true); // stores player whose POV board should be rendered from 
-    const [fen, setFen] = useState('rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1');
+
+    const { fen } = useParams();
+    const [FEN, setFEN] = useState(fen);
 
     /* sets which piece pawn is being promoted to */
     const handlePopUpClick = (clicked) => {
@@ -27,7 +29,7 @@ export default function GamePage(props) {
 
     return (
         <>
-            <Navbar fen={fen} setFen={setFen} />
+            <Navbar fen={FEN} setFen={FEN} />
             <div className='board-container-container'>
                 <div className='board-container'>
                     <div className='board'>
@@ -36,8 +38,8 @@ export default function GamePage(props) {
                             sender={sender}
                             showPromotionPopUp={showPromotionPopUp}
                             received={received}
-                            fen={fen}
-                            setFen={setFen} />        {/* passes variables and methods to board */}
+                            fen={FEN}
+                            setFen={setFEN} />        {/* passes variables and methods to board */}
                     </div>                  {/* renders board */}
                 </div>
             </div>

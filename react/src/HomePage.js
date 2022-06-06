@@ -17,8 +17,8 @@ export default function HomePage() {
     return (
         <div className='home-page'>
             <Logo></Logo>
-            <Link to='/game'><div className='button'>NEW</div></Link>
-            <Link to='/game' state={{ from: 'FEN' }}><div className='button' onClick={onLoad}>LOAD</div></Link>
+            <Link to='/game/${fen}'><div className='button'>NEW</div></Link>
+            <Link to={`/game/${fen}`} state={{ from: 'FEN' }}><div className='button' onClick={onLoad}>LOAD</div></Link>
         </div>
     )
 }
